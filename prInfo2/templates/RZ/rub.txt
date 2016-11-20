@@ -1,0 +1,1 @@
+<@Rubrikator:>{RUB_NAME}

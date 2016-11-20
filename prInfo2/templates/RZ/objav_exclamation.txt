@@ -1,0 +1,3 @@
+<@vakansia NEW!:><FONT "PragmaticaC"><SIZE 18><I><CBASELINE -8.5>!<FONT "PragmaticaC"><SIZE 10><I><CBASELINE 0>{OBJAV_HEADER}
+{\n}<@Trebovania NEW!:><GTABS $>{OBJAV_BODY}
+

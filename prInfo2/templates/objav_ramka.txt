@@ -1,0 +1,1 @@
+<ParaStyle:Vakansiya><CharStyle:Vakansiya\_vid>{OBJAV_HEADER} <CharStyle:>{OBJAV_BODY}

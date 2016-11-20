@@ -1,0 +1,1 @@
+<@body1:><GALIGNMENT "left"><GBBELOW col 1 0 0 2.85 Black (0 2 1)><FONT "FuturisC"><SIZE 14><B><CALL><CLEADING 14>{RUB_NAME}<SIZE $><CALL>

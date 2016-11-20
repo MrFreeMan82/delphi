@@ -1,0 +1,1 @@
+{KA_NAME}	{KA_INFO_FULL}

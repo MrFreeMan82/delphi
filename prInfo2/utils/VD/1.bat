@@ -1,0 +1,1 @@
+imdisk -a -f e:\VD\prinfo.ima -m A:

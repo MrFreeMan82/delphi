@@ -1,0 +1,2 @@
+<@vakansia:>{OBJAV_HEADER}
+{\n}<@Trebovania:>{OBJAV_BODY}

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016.11.16 17:07:27.814.pas,C:\Users\Dima\Documents\RAD Studio\Projects\Unit1.pas=D:\Dima\delphi\Parser\uParser.pas</Transaction>
+    <Transaction>2016.11.16 17:07:27.845.dfm,C:\Users\Dima\Documents\RAD Studio\Projects\Unit1.dfm=D:\Dima\delphi\Parser\uParser.dfm</Transaction>
+    <Transaction>2016.11.16 17:07:33.283.dproj,C:\Users\Dima\Documents\RAD Studio\Projects\Project1.dproj=D:\Dima\delphi\Parser\Parser.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

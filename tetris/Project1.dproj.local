@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2011.02.05 13:01:03.814.pas,C:\Users\Дмитрий\Documents\RAD Studio\Projects\Unit1.pas=R:\Work\Unit1.pas</Transaction>
+    <Transaction>2011.02.05 13:01:03.814.dfm,C:\Users\Дмитрий\Documents\RAD Studio\Projects\Unit1.dfm=R:\Work\Unit1.dfm</Transaction>
+    <Transaction>2011.02.05 13:01:05.073.dproj,C:\Users\Дмитрий\Documents\RAD Studio\Projects\Project1.dproj=R:\Work\Project1.dproj</Transaction>
+    <Transaction>2011.02.05 13:03:04.559.pas,R:\Work\Unit2.pas=R:\Work\Tetris.pas</Transaction>
+    <Transaction>2011.02.07 21:31:11.337.pas,R:\Work\tetris_my\Unit2.pas=R:\Work\tetris_my\TetraMinos.pas</Transaction>
+  </Transactions>
+</BorlandProject>

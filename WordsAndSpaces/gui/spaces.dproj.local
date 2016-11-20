@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016.11.13 11:42:18.612.pas,C:\Users\Dima\Documents\RAD Studio\Projects\Unit1.pas=D:\Dima\delphi\WordsAndSpaces\gui\uMain.pas</Transaction>
+    <Transaction>2016.11.13 11:42:18.612.dfm,C:\Users\Dima\Documents\RAD Studio\Projects\Unit1.dfm=D:\Dima\delphi\WordsAndSpaces\gui\uMain.dfm</Transaction>
+    <Transaction>2016.11.13 11:42:24.270.dproj,C:\Users\Dima\Documents\RAD Studio\Projects\Project1.dproj=D:\Dima\delphi\WordsAndSpaces\gui\spaces.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

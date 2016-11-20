@@ -1,0 +1,2 @@
+<ParaStyle:Vakansiya>{OBJAV_HEADER}
+{\n}<ParaStyle:Trebovaniya>{OBJAV_BODY}

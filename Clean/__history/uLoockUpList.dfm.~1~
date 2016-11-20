@@ -1,0 +1,83 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 54
+  ClientWidth = 119
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object BitBtn1: TBitBtn
+    Left = 88
+    Top = 48
+    Width = 75
+    Height = 25
+    Kind = bkCancel
+    TabOrder = 0
+  end
+  object txtNewLq: TDBEdit
+    Left = 0
+    Top = -1
+    Width = 121
+    Height = 21
+    DataField = 'LQ_NAME'
+    DataSource = dsNewLiq
+    TabOrder = 1
+    OnChange = txtNewLqChange
+    OnKeyDown = txtNewLqKeyDown
+  end
+  object lstLq: TDBLookupListBox
+    Left = 0
+    Top = 19
+    Width = 121
+    Height = 39
+    BorderStyle = bsNone
+    DataField = 'LQ_ID'
+    DataSource = dsNewLiq
+    KeyField = 'LQ_ID'
+    ListField = 'LQ_NAME'
+    ListSource = data.dsLiquid
+    TabOrder = 2
+    Visible = False
+    OnKeyUp = lstLqKeyUp
+    OnMouseUp = lstLqMouseUp
+  end
+  object qNewLiq: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT * FROM LIQUID l WHERE l.lq_id = -1')
+    SQLConnection = data.connection
+    Left = 8
+  end
+  object prvNewLiq: TDataSetProvider
+    DataSet = qNewLiq
+    Left = 48
+  end
+  object cdsNewLiq: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'prvNewLiq'
+    Left = 96
+    object cdsNewLiqLQ_ID: TIntegerField
+      FieldName = 'LQ_ID'
+    end
+    object cdsNewLiqLQ_NAME: TStringField
+      FieldName = 'LQ_NAME'
+      Size = 32
+    end
+    object cdsNewLiqLQ_PRICE: TFloatField
+      FieldName = 'LQ_PRICE'
+    end
+  end
+  object dsNewLiq: TDataSource
+    DataSet = cdsNewLiq
+    Left = 144
+  end
+end

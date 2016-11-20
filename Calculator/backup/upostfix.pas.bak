@@ -1,0 +1,100 @@
+unit upostfix;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils;
+
+  function convertToPostfix(const infixStr: string; out postfixStr: string): boolean;
+  function initPostfix(): boolean;
+  procedure freePostfix;
+
+implementation
+uses uStack, ulexer;
+
+var
+   stack: PStack;
+
+function priority(op: char): integer;
+begin
+     case op of
+          '+', '-', '=': result := 10;
+          '*', '/': result := 20;
+          '^': result := 30;
+          else result := 0;
+     end;
+end;
+
+function convertToPostfix(const infixStr: string; out postfixStr: string): boolean;
+var
+    token: TToken;
+   /// p1, p2: integer;
+   // ch1, ch2: char;
+begin
+    postfixStr := '';
+    createTokens(infixStr);
+
+end;
+
+{while getNextToken(infixStr, i, token) do
+begin
+     case token.typeof of
+          tNum: begin
+                  postfixStr := postfixStr + token.value + ';';
+          end;
+          tDiv: begin
+                  if stack^.empty
+                  then begin
+                            ch1 := token.value[1];
+                            push(stack, ord(ch1))
+                  end
+                  else begin
+                            ch1 := chr(read(stack));
+                            ch2 := token.value[1];
+                            p1 := priority(ch1);
+                            p2 := priority(ch2);
+
+                            if ch2 = '(' then
+                            begin
+                                 push(stack, ord(ch2));
+                                 continue;
+                            end;
+
+                            if p2 > p1 then
+                            begin
+                                 push(stack, ord(ch2));
+                                 continue;
+                            end;
+
+                            if p2 <= p1 then
+                            begin
+                                 pop(stack, k);
+                                 postfixStr := postfixStr + chr(k) + ';';
+                                 push(stack, ord(ch2));
+                            end;
+                  end;
+          end;
+     end;
+end; }
+
+function initPostfix: boolean;
+begin
+     try
+        new(stack);
+        clear(stack);
+        result := true;
+     except
+        result := false;
+        dispose(stack);
+     end;
+end;
+
+procedure freePostfix;
+begin
+     dispose(stack);
+end;
+
+end.
+

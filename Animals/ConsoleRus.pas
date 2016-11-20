@@ -1,0 +1,60 @@
+unit ConsoleRus;
+
+{$MODE Delphi}
+
+interface
+
+function ConsoleFont: boolean;
+
+
+implementation
+
+const
+  LF_FACESIZE = 32;
+
+type
+  COORD = record
+  X, Y: Word;
+end;
+
+CONSOLE_FONT_INFOEX = record  // структура, описанная в MSDN
+    cbSize: Cardinal;
+    nFont: Cardinal;
+    dwFontSize: COORD;
+    FontFamily: Cardinal;
+    FontWeight: Cardinal;
+    FaceName: Array [0 .. LF_FACESIZE - 1] of WideChar;
+end;
+
+PCONSOLE_FONT_INFOEX = ^CONSOLE_FONT_INFOEX;
+
+function SetCurrentConsoleFontEx(hConsoleOutput: THandle;
+  bMaximumWindow: LongBool; lpConsoleCurrentFontEx: PCONSOLE_FONT_INFOEX)
+  : boolean; stdcall; external 'Kernel32.dll' name 'SetCurrentConsoleFontEx';
+
+function GetStdHandle(nStdHandle: cardinal): THandle; stdcall;
+  external 'Kernel32.dll' name 'GetStdHandle';
+
+
+function ConsoleFont: boolean;
+var
+  FontInfo: CONSOLE_FONT_INFOEX;
+begin
+  with FontInfo do
+  begin
+    cbSize := sizeof(FontInfo);
+    nFont := 2;
+    dwFontSize.X := 10;
+    dwFontSize.Y := 25;
+    FontFamily := FF_DONTCARE;
+    FontWeight := 400;
+    FaceName := 'Lucida Console';
+  end;
+  if SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), True,
+    @FontInfo) then
+    result := True
+  else
+    result := false;
+end;
+
+end.

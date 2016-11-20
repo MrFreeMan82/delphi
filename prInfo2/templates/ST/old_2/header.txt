@@ -1,0 +1,5 @@
+<UNICODE-WIN>
+<Version:11.2><FeatureSet:InDesign-Roman><ColorTable:=<Black:COLOR:CMYK:Process:0,0,0,1>>
+<DefineParaStyle:Rubrica=<Nextstyle:Rubrica><cTypeface:Bold><cSize:14.000000><cCase:All Caps><pHyphenation:0><pSpaceAfter:11.338582><cFont:PragmaticaC \(TT\)><pRuleBelowStroke:0.500000><pRuleBelowOffset:4.251968><pRuleBelowOn:1><pTextAlignment:Center><cOTFContAlt:0>>
+<DefineParaStyle:Vakansiya=<Nextstyle:Vakansiya><cTypeface:Bold><cSize:6.000000><cCase:All Caps><cLeading:6.500000><pSpaceBefore:5.669291><cFont:PragmaticaC \(TT\)><pKeepParaTogether:1><pKeepLines:1><pRuleAboveStroke:0.500000><pRuleAboveOffset:7.937007><pRuleAboveOn:1><pSingleWordAlignment:Left><cOTFContAlt:0>>
+<DefineParaStyle:Trebovaniya=<Nextstyle:Trebovaniya><cSize:6.000000><cLeading:6.500000><pSpaceBefore:0.566929><cFont:PragmaticaC \(TT\)><pKeepParaTogether:1><pKeepLines:1><pTextAlignment:JustifyLeft><cOTFContAlt:0>>

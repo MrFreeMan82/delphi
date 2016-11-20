@@ -1,0 +1,36 @@
+unit uSelectUser;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, StdCtrls, Buttons, uData, FMTBcd, DB, Provider,
+  DBClient, SqlExpr;
+
+type
+  TfrmSelectUser = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    grdUser: TDBGrid;
+    grdOperator: TDBGrid;
+    btOk: TBitBtn;
+    btCancel: TBitBtn;
+    qUser: TSQLQuery;
+    cdsUser: TClientDataSet;
+    prvUser: TDataSetProvider;
+    dsUser: TDataSource;
+    cdsUserU_ID: TIntegerField;
+    cdsUserUT_ID: TIntegerField;
+    cdsUserU_FIO: TStringField;
+    cdsUserUT_NAME: TStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+implementation
+
+{$R *.dfm}
+
+end.

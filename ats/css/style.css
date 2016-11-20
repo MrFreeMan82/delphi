@@ -1,0 +1,119 @@
+@CHARSET "UTF-8";
+body{ 
+	margin: 0;
+	background:#afd792;
+	background-size: cover;
+	font: 10pt tahoma;
+}
+  	
+.form{ 
+		  background:#E5D3BD;
+		  border: 2px solid #E81E25;
+		  position:absolute;
+		  left:50%;
+		  top:50%;
+		  margin:-100px 0 0 -150px;
+}
+
+#authform{ 
+    	 padding:5px;
+		 line-height:1.5;   
+}  
+		  
+.customtable { border-collapse: collapse;}
+   	
+.customtable td, th {padding: 2px;} /* Поля вокруг содержимого таблицы */
+   
+.customtable th {
+    	  background: #afd792; /* Цвет фона */
+    	  color: #333;  /* Цвет текста */
+}
+   
+.customtable thead {font-weight:bold;}
+
+.outputtable {	      
+   		  width:100%;
+   		  border-collapse: collapse;
+}
+   	
+.outputtable td, th {
+   		  padding: 2px; /* Поля вокруг содержимого таблицы */
+    	  border: 1px solid #000; /* Параметры рамки */    	  
+}
+   
+.outputtable th {
+    	  background: #afd792; /* Цвет фона */
+    	  color: #333;  /* Цвет текста */
+}
+   
+.outputtable thead {
+   		 background: #8fa09b;
+   		 color: #edeed5;
+   		 font-weight:bold;
+}
+
+.outputtable tbody{
+	 font: 8pt tahoma;
+}
+
+.outputtable tbody tr:hover {
+    	 background: #1622C9; /* Цвет фона при наведении */
+    	 color: #fff; /* Цвет текста при наведении */    	
+}
+
+   
+#mainheader {
+    	 position: fixed;
+    	 left: 0; top: 0;
+    	 background: #8fa09b; /* Цвет фона */
+    	 height: 20px;
+    	 color: #edeed5; /* Цвет текста */
+    	 padding: 5px; /* Отступы вокруг текста */
+    	 width: 100%;
+    	 font-size: 12pt; /* Размер текста */
+    	 z-index:2;
+}
+   
+#mainheader h1 { padding: 5px; margin: 0; font-size:24pt }
+
+.mainmenu {
+    	 position: fixed;
+    	 left:0; top: 30px; 	
+    	 height:20px;
+    	 width: 100%; /* Ширина меню */
+    	 padding: 5px; /* Отступы от рамки до пунктов меню */
+    	 border: 1px solid #000; /* Рамка вокруг меню */
+    	 font-size: 10pt; /* Размер текста */
+    	 background: #f0f0f0;
+    	 z-index:2;
+}
+   
+.mainmenu A {
+    	 padding: 3px; /* Отступ от рамки вокруг ссылки до текста */
+    	 text-decoration: none; /* Убираем подчеркивание у ссылок */
+}
+   
+.mainmenu A:hover {
+		 text-decoration:underline;
+    	 color: #800000; /* Новый цвет ссылки */
+}
+      
+#mainleftcol {
+		 position: absolute;
+		 left:0; top: 60px;  
+    	 width: 80%; /* Ширина левой колонки */
+    	 padding: 5px; /* Поля вокруг текста */
+    	 z-index:1;
+}
+   
+#mainfooter {
+    	 clear: both;
+    	 position: fixed; /* Фиксированное положение */
+    	 left: 0; bottom: 0; /* Левый нижний угол */
+    	 padding: 5px; /* Поля вокруг текста */
+    	 background: #39b54a; /* Цвет фона */
+    	 color: #fff; /* Цвет текста */
+    	 width: 100%; /* Ширина слоя */
+    	 height: 20px;
+    	 z-index:2;
+}

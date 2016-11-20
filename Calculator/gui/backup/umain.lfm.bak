@@ -1,0 +1,66 @@
+object Form1: TForm1
+  Left = 458
+  Height = 439
+  Top = 261
+  Width = 671
+  Caption = 'Form1'
+  ClientHeight = 439
+  ClientWidth = 671
+  OnClick = FormClick
+  OnCreate = FormCreate
+  OnDblClick = FormDblClick
+  OnKeyPress = FormKeyPress
+  OnMouseMove = FormMouseMove
+  OnPaint = FormPaint
+  Position = poDesktopCenter
+  LCLVersion = '1.2.4.0'
+  object ToolBar1: TToolBar
+    Left = 0
+    Height = 26
+    Top = 0
+    Width = 671
+    Caption = 'ToolBar1'
+    ShowCaptions = True
+    TabOrder = 0
+    object ToolButton1: TToolButton
+      Left = 1
+      Top = 2
+      Caption = '^'
+      OnClick = ToolButton1Click
+    end
+    object ToolButton2: TToolButton
+      Left = 24
+      Top = 2
+      Caption = '( )'
+    end
+  end
+  object Memo1: TMemo
+    Left = 0
+    Height = 146
+    Top = 293
+    Width = 671
+    Align = alBottom
+    Enabled = False
+    ReadOnly = True
+    TabOrder = 1
+  end
+  object procces: TProcess
+    Active = False
+    ApplicationName = 'postfix.exe'
+    CommandLine = 'postfix.exe'
+    Executable = 'postfix.exe'
+    Options = [poWaitOnExit, poUsePipes]
+    Priority = ppNormal
+    StartupOptions = []
+    ShowWindow = swoHIDE
+    WindowColumns = 0
+    WindowHeight = 0
+    WindowLeft = 0
+    WindowRows = 0
+    WindowTop = 0
+    WindowWidth = 0
+    FillAttribute = 0
+    left = 48
+    top = 64
+  end
+end

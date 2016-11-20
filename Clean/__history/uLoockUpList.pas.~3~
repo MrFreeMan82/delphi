@@ -1,0 +1,92 @@
+unit uLoockUpList;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, FMTBcd, DB, DBClient, Provider, SqlExpr, DBCtrls, StdCtrls, Mask,
+  Buttons;
+
+type
+  TfrmLookUp = class(TForm)
+    txtNewLq: TDBEdit;
+    lstLq: TDBLookupListBox;
+    qNewLiq: TSQLQuery;
+    prvNewLiq: TDataSetProvider;
+    cdsNewLiq: TClientDataSet;
+    cdsNewLiqLQ_ID: TIntegerField;
+    cdsNewLiqLQ_NAME: TStringField;
+    cdsNewLiqLQ_PRICE: TFloatField;
+    dsNewLiq: TDataSource;
+    procedure lstLqKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure lstLqMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure txtNewLqChange(Sender: TObject);
+    procedure txtNewLqKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmLookUp: TfrmLookUp;
+
+implementation
+
+uses uData;
+
+{$R *.dfm}
+
+procedure TfrmLookUp.lstLqKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+     txtNewLq.OnChange := nil;
+     cdsNewLiqLQ_NAME.AsString := lstLq.SelectedItem;
+     txtNewLq.OnChange := txtChange;
+
+     if key = VK_RETURN then
+     begin
+         lstLq.Visible := false;
+     end;
+end;
+
+procedure TfrmLookUp.lstLqMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var key: word;
+begin
+     key := VK_RETURN;
+     lstLqKeyUp(Sender, key, []);
+end;
+
+procedure TfrmLookUp.txtNewLqChange(Sender: TObject);
+begin
+    if trim(txtNewLq.Text) = '' then
+    begin
+         if lstLq.Visible then lstLq.Visible := false;
+         exit;
+    end;
+
+    data.filterDictionary(data.cdsLiquid, 'UPPER(LQ_NAME) LIKE ' + QuotedStr('%' + AnsiUpperCase(txtNewLq.Text) + '%'));
+
+    if data.cdsLiquid.RecordCount = 0 then
+    begin
+          if lstLq.Visible then lstLq.Visible := false;
+          exit;
+    end;
+
+    if not lstLq.Visible then lstLq.Visible := true;
+end;
+
+procedure TfrmLookUp.txtNewLqKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if key = 40 then
+   begin
+        if not lstLq.Visible then exit;
+
+        lstLq.SetFocus;
+   end;
+end;
+
+end.

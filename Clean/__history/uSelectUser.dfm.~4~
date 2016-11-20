@@ -1,0 +1,116 @@
+object frmSelectUser: TfrmSelectUser
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = #1042#1099#1073#1077#1088#1080#1090#1077' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1103':'
+  ClientHeight = 302
+  ClientWidth = 594
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 16
+  object Label1: TLabel
+    Left = 8
+    Top = 8
+    Width = 88
+    Height = 16
+    Caption = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1100':'
+  end
+  object Label2: TLabel
+    Left = 303
+    Top = 8
+    Width = 62
+    Height = 16
+    Caption = #1054#1087#1077#1088#1072#1090#1086#1088':'
+  end
+  object grdUser: TDBGrid
+    Left = 8
+    Top = 30
+    Width = 285
+    Height = 219
+    Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        Title.Alignment = taCenter
+        Title.Caption = #1048#1084#1103
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 125
+        Visible = True
+      end
+      item
+        Expanded = False
+        Title.Alignment = taCenter
+        Title.Caption = #1058#1080#1087
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 91
+        Visible = True
+      end>
+  end
+  object grdOperator: TDBGrid
+    Left = 303
+    Top = 30
+    Width = 285
+    Height = 219
+    Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        Title.Alignment = taCenter
+        Title.Caption = #1048#1084#1103
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 208
+        Visible = True
+      end>
+  end
+  object btOk: TBitBtn
+    Left = 416
+    Top = 269
+    Width = 83
+    Height = 25
+    DoubleBuffered = True
+    Kind = bkOK
+    ParentDoubleBuffered = False
+    TabOrder = 2
+  end
+  object btCancel: TBitBtn
+    Left = 505
+    Top = 269
+    Width = 83
+    Height = 25
+    Caption = #1054#1090#1084#1077#1085#1072
+    DoubleBuffered = True
+    Kind = bkCancel
+    ParentDoubleBuffered = False
+    TabOrder = 3
+  end
+end

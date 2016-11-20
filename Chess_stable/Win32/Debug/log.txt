@@ -1,0 +1,3 @@
+18:31:55: Move tPawn  2,6  2,4;
+18:32:01: Move tRKnight  6,0  5,2;
+18:32:23: Messanger destroyed

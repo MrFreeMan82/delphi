@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="9"/>
+    <BuildModes Active="Default"/>
+    <Units Count="6">
+      <Unit0>
+        <Filename Value="calculator.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="calculator"/>
+        <UsageCount Value="200"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="umain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="umain"/>
+        <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="51"/>
+        <CursorPos X="1" Y="71"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="uformula.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uformula"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="373"/>
+        <CursorPos X="1" Y="393"/>
+        <FoldState Value=" T3j1030161222121]3!"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="C:\lazarus\lcl\include\font.inc"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="788"/>
+        <CursorPos X="1" Y="818"/>
+        <UsageCount Value="100"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="C:\lazarus\lcl\include\control.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="2695"/>
+        <CursorPos X="1" Y="2713"/>
+        <UsageCount Value="4"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="ustack.pas"/>
+        <UnitName Value="uStack"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="14"/>
+        <CursorPos X="1" Y="34"/>
+        <UsageCount Value="42"/>
+        <Loaded Value="True"/>
+      </Unit5>
+    </Units>
+    <General>
+      <ActiveWindowIndexAtStart Value="0"/>
+    </General>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="257" Column="1" TopLine="197"/>
+      </Position1>
+      <Position2>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="258" Column="1" TopLine="197"/>
+      </Position2>
+      <Position3>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="260" Column="1" TopLine="197"/>
+      </Position3>
+      <Position4>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="261" Column="1" TopLine="197"/>
+      </Position4>
+      <Position5>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="262" Column="1" TopLine="197"/>
+      </Position5>
+      <Position6>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="264" Column="1" TopLine="197"/>
+      </Position6>
+      <Position7>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="265" Column="1" TopLine="197"/>
+      </Position7>
+      <Position8>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="266" Column="1" TopLine="197"/>
+      </Position8>
+      <Position9>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="267" Column="1" TopLine="197"/>
+      </Position9>
+      <Position10>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="269" Column="1" TopLine="197"/>
+      </Position10>
+      <Position11>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="383" Column="1" TopLine="358"/>
+      </Position11>
+      <Position12>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="384" Column="1" TopLine="358"/>
+      </Position12>
+      <Position13>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="195" Column="1" TopLine="106"/>
+      </Position13>
+      <Position14>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="196" Column="1" TopLine="106"/>
+      </Position14>
+      <Position15>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="197" Column="1" TopLine="106"/>
+      </Position15>
+      <Position16>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="198" Column="1" TopLine="106"/>
+      </Position16>
+      <Position17>
+        <Filename Value="C:\lazarus\lcl\include\font.inc"/>
+        <Caret Line="803" Column="1" TopLine="788"/>
+      </Position17>
+      <Position18>
+        <Filename Value="C:\lazarus\lcl\include\font.inc"/>
+        <Caret Line="804" Column="1" TopLine="788"/>
+      </Position18>
+      <Position19>
+        <Filename Value="C:\lazarus\lcl\include\font.inc"/>
+        <Caret Line="806" Column="1" TopLine="788"/>
+      </Position19>
+      <Position20>
+        <Filename Value="C:\lazarus\lcl\include\font.inc"/>
+        <Caret Line="807" Column="1" TopLine="788"/>
+      </Position20>
+      <Position21>
+        <Filename Value="C:\lazarus\lcl\include\font.inc"/>
+        <Caret Line="808" Column="1" TopLine="788"/>
+      </Position21>
+      <Position22>
+        <Filename Value="C:\lazarus\lcl\include\font.inc"/>
+        <Caret Line="809" Column="1" TopLine="788"/>
+      </Position22>
+      <Position23>
+        <Filename Value="C:\lazarus\lcl\include\font.inc"/>
+        <Caret Line="810" Column="1" TopLine="788"/>
+      </Position23>
+      <Position24>
+        <Filename Value="C:\lazarus\lcl\include\font.inc"/>
+        <Caret Line="811" Column="1" TopLine="788"/>
+      </Position24>
+      <Position25>
+        <Filename Value="C:\lazarus\lcl\include\font.inc"/>
+        <Caret Line="813" Column="1" TopLine="788"/>
+      </Position25>
+      <Position26>
+        <Filename Value="C:\lazarus\lcl\include\font.inc"/>
+        <Caret Line="815" Column="1" TopLine="788"/>
+      </Position26>
+      <Position27>
+        <Filename Value="C:\lazarus\lcl\include\font.inc"/>
+        <Caret Line="818" Column="1" TopLine="788"/>
+      </Position27>
+      <Position28>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="385" Column="1" TopLine="355"/>
+      </Position28>
+      <Position29>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="386" Column="1" TopLine="355"/>
+      </Position29>
+      <Position30>
+        <Filename Value="uformula.pas"/>
+        <Caret Line="388" Column="1" TopLine="355"/>
+      </Position30>
+    </JumpHistory>
+  </ProjectSession>
+  <Debugging>
+    <BreakPoints Count="1">
+      <Item1>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="uformula.pas"/>
+        <Line Value="257"/>
+      </Item1>
+    </BreakPoints>
+  </Debugging>
+  <EditorMacros Count="0"/>
+</CONFIG>

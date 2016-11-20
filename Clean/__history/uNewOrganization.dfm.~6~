@@ -1,0 +1,116 @@
+object frmNewOrg: TfrmNewOrg
+  Left = 0
+  Top = 0
+  Caption = #1053#1086#1074#1072#1103' '#1086#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103
+  ClientHeight = 124
+  ClientWidth = 302
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label4: TLabel
+    Left = 4
+    Top = 16
+    Width = 77
+    Height = 13
+    Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077':'
+  end
+  object Label5: TLabel
+    Left = 4
+    Top = 44
+    Width = 77
+    Height = 13
+    Caption = #1060#1086#1088#1084#1072' '#1089#1086#1073#1089#1090#1074'.:'
+  end
+  object Label9: TLabel
+    Left = 4
+    Top = 71
+    Width = 26
+    Height = 13
+    Caption = #1058#1077#1083'.:'
+  end
+  object cboOrgType: TDBLookupComboBox
+    Left = 86
+    Top = 39
+    Width = 208
+    Height = 21
+    TabOrder = 0
+  end
+  object BitBtn1: TBitBtn
+    Left = 138
+    Top = 93
+    Width = 75
+    Height = 25
+    Kind = bkOK
+    TabOrder = 1
+  end
+  object BitBtn2: TBitBtn
+    Left = 219
+    Top = 93
+    Width = 75
+    Height = 25
+    Caption = #1054#1090#1084#1077#1085#1072
+    Kind = bkCancel
+    TabOrder = 2
+  end
+  object txtOrgName: TDBEdit
+    Left = 86
+    Top = 12
+    Width = 208
+    Height = 21
+    TabOrder = 3
+  end
+  object txtOrgTel: TDBEdit
+    Left = 86
+    Top = 66
+    Width = 208
+    Height = 21
+    TabOrder = 4
+  end
+  object qNewOrg: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT * FROM ORGANIZATION org WHERE org.org_id = -1')
+    SQLConnection = data.connection
+    Left = 40
+    Top = 8
+  end
+  object prvNewOrg: TDataSetProvider
+    DataSet = qNewOrg
+    Left = 80
+    Top = 8
+  end
+  object cdsNewOrg: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'prvNewOrg'
+    Left = 120
+    Top = 8
+    object cdsNewOrgORG_ID: TIntegerField
+      FieldName = 'ORG_ID'
+    end
+    object cdsNewOrgORGT_ID: TIntegerField
+      FieldName = 'ORGT_ID'
+    end
+    object cdsNewOrgORG_NAME: TStringField
+      FieldName = 'ORG_NAME'
+      Size = 512
+    end
+    object cdsNewOrgORG_TEL: TStringField
+      FieldName = 'ORG_TEL'
+      EditMask = '!+99\ 000 0000 000;1;_'
+      Size = 32
+    end
+  end
+  object dsNewOrg: TDataSource
+    DataSet = cdsNewOrg
+    Left = 160
+    Top = 8
+  end
+end

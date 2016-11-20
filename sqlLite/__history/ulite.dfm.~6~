@@ -1,0 +1,107 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 480
+  ClientWidth = 630
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object ListView1: TListView
+    Left = 0
+    Top = 0
+    Width = 250
+    Height = 480
+    Align = alLeft
+    Columns = <>
+    TabOrder = 0
+    ExplicitLeft = 24
+    ExplicitTop = 80
+    ExplicitHeight = 150
+  end
+  object Panel1: TPanel
+    Left = 250
+    Top = 0
+    Width = 380
+    Height = 480
+    Align = alClient
+    TabOrder = 1
+    ExplicitLeft = 352
+    ExplicitTop = 288
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object Image1: TImage
+      Left = 1
+      Top = 1
+      Width = 378
+      Height = 432
+      Align = alTop
+    end
+    object RadioButton1: TRadioButton
+      Left = 6
+      Top = 456
+      Width = 27
+      Height = 17
+      Caption = '1'
+      TabOrder = 0
+    end
+    object RadioButton2: TRadioButton
+      Left = 54
+      Top = 456
+      Width = 27
+      Height = 17
+      Caption = '2'
+      TabOrder = 1
+    end
+    object RadioButton3: TRadioButton
+      Left = 102
+      Top = 456
+      Width = 27
+      Height = 17
+      Caption = '3'
+      TabOrder = 2
+    end
+    object RadioButton4: TRadioButton
+      Left = 150
+      Top = 456
+      Width = 27
+      Height = 17
+      Caption = '4'
+      TabOrder = 3
+    end
+    object RadioButton5: TRadioButton
+      Left = 198
+      Top = 456
+      Width = 27
+      Height = 17
+      Caption = '5'
+      TabOrder = 4
+    end
+    object btAdd: TButton
+      Left = 293
+      Top = 448
+      Width = 75
+      Height = 25
+      Caption = 'Add'
+      TabOrder = 5
+      OnClick = btAddClick
+    end
+  end
+  object SQLQuery1: TSQLQuery
+    Params = <>
+    Left = 128
+    Top = 216
+  end
+  object OpenPic: TOpenPictureDialog
+    Left = 152
+    Top = 328
+  end
+end

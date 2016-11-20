@@ -1,0 +1,60 @@
+unit usymbols;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  SysUtils, ulexer;
+
+procedure insert(token: PToken);
+function locate(token: PToken): integer;
+function getTokenByIndex(index: integer): PToken;
+function storeToken(token: PToken): integer;
+
+implementation
+
+const SYM_INIT_LEN = 100;
+      MEM_INIT_LEN = 100;
+
+var symbols: array of TToken;
+    idx: integer = 0;
+    memory: array of TToken;
+    mix:integer = 0;
+
+procedure insert(token: PToken);
+begin
+    if (idx = length(symbols) div 2) then setLength(symbols, length(symbols) + SYM_INIT_LEN);
+    symbols[idx] := token^;
+    inc(idx);
+end;
+
+function locate(token: PToken): integer;
+var i: integer;
+begin
+     result := -1;
+     for i := 0 to idx do
+          if (token^.typeof = symbols[i].typeof) and
+             (token^.value = symbols[i].value) then exit(i);
+end;
+
+function getTokenByIndex(index: integer): PToken;
+begin
+     result := nil;
+     if (index >= 0) and (index <= length(symbols)) then result := @symbols[index];
+end;
+
+function storeToken(token: PToken): integer;
+begin
+     if mix = length(memory) then setLength(memory, length(memory) + MEM_INIT_LEN);
+     result := mix;
+     symbols[mix] := token^;
+     inc(mix);
+end;
+
+initialization
+              setLength(symbols, SYM_INIT_LEN);
+              setLength(memory, MEM_INIT_LEN)
+
+end.
+

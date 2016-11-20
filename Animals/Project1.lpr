@@ -1,0 +1,312 @@
+program Project1;
+
+{$MODE Delphi}
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils, Classes, StrUtils;
+
+type
+  PTreeElement = ^TTreeElement;
+  TTReeElement = record
+      ID : cardinal;
+      Question,Answear : string;
+      PYes,PNo : PTreeElement;
+      FirstChild,NextSibling,Parent : PTreeElement;
+end;
+
+function Yes():boolean;
+var
+  ch : char;
+begin
+     Readln(ch);
+     ch := LowerCase(ch);
+     result := (ch = 'y') or (ch = 'д');
+end;
+
+function NextPlay():boolean;
+begin
+      WriteLn('Continue?');
+      result := Yes;
+      if result then
+      begin
+          WriteLn;
+          WriteLn('Think an animal.');
+      end
+end;
+
+var F: TextFile;
+
+procedure Save(Start : PTreeElement);
+var
+    Node : PTReeElement;
+    buf : string;
+begin
+
+     buf := IntToStr(Start.ID) + ';';
+     buf := buf + Start.Question + ';';
+     buf := buf + Start.Answear + ';';
+
+     if Assigned(Start.PYes) then
+          buf := buf + IntToStr(Start.PYes.ID) + ';'
+     else
+          buf := buf + '0;';
+
+     if Assigned(Start.PNo) then
+          buf := buf + IntToStr(Start.PNo.ID) + ';'
+     else
+          buf := buf + '0;';
+
+     if Assigned(Start.Parent) then
+          buf := buf + IntToStr(Start.Parent.ID) + ';'
+     else
+          buf := buf + '0;';
+
+     if Assigned(Start.FirstChild) then
+          buf := buf + IntToStr(Start.FirstChild.ID) + ';'
+     else
+          buf := buf + '0;';
+
+     if Assigned(Start.NextSibling) then
+          buf := buf + IntToStr(Start.NextSibling.ID)
+     else
+          buf := buf + '0';
+
+     Append(F);
+     WriteLn(F,buf);
+     Flush(F);
+     buf := '';
+
+     Node := Start.FirstChild;
+
+     while (Node <> nil) do
+     begin
+              Save(Node);
+              Node := Node.NextSibling;
+     end;
+end;
+
+procedure SaveData(const FileName : string; Start : PTreeElement);
+begin
+   AssignFile(F,FileName);
+   ReWrite(F);
+   Save(Start);
+   CloseFile(F);
+end;
+
+
+function ReadTreeElement(const buf: string):PTreeElement;
+var len,i,fieldnum : integer;
+    ch : char;
+    s : string;
+begin
+    result := nil;
+    len := length(buf);
+    if len > 0 then
+    begin
+         fieldnum := 1;
+         s := '';
+
+         for i := 1 to len do
+         begin
+                ch := buf[i];
+                if (ch = ';') or (i = len) then
+                begin
+
+                     case fieldnum of
+                            1 : begin
+                                    New(result);
+                                    result.ID := StrToInt(s);
+                                end;
+                            2 : result.Question   := trim(s);
+                            3 : result.Answear    := trim(s) ;
+                            4 :  {%H-} result.PYes       := PTReeElement(StrToInt(s));
+                            5 :  {%H-} result.PNo        := PTReeElement(StrToInt(s));
+                            6 :  {%H-} result.Parent     := PTreeElement(StrToInt(s));
+                            7 :  {%H-} result.FirstChild := PTreeElement(StrToInt(s));
+                            8 : begin
+                                    s := s + ch;
+                                     {%H-} result.NextSibling := PTreeElement(StrToInt(s));
+                                end;
+                     end;
+                     inc(fieldnum);
+                     s := '';
+                end
+                else s := s + ch;
+         end;
+    end;
+end;
+
+procedure Read(var TreeElement : PTreeElement; Parent : PTreeElement; out Root : PTreeElement; out cnt : cardinal);
+
+        procedure InitBranches();
+        begin
+            {%H-} if cardinal(Parent.NextSibling) = TreeElement.ID then
+                                   Parent.NextSibling := TreeElement;
+
+            {%H-} if cardinal(Parent.PYes) = TreeElement.id then
+                                  Parent.PYes := TreeElement;
+
+            {%H-} if cardinal(Parent.PNo) = TreeElement.ID then
+                                  Parent.PNo  := TreeElement;
+
+            {%H-} if cardinal(Parent.FirstChild) = TreeElement.ID then
+                                  Parent.FirstChild := TreeElement;
+        end;
+var
+  buf : string;
+begin
+    while not Eof(F) do
+    begin
+        ReadLn(F,buf);
+        TreeElement := ReadTreeElement(buf);
+        if TreeElement.ID > cnt then cnt := TreeElement.ID;
+
+        if Parent = nil then
+        begin
+             if Root = nil then Root := TreeElement;
+             Parent := TreeElement;
+             Continue;
+        end
+        else begin
+
+           InitBranches();
+     {%H-} while cardinal(TreeElement.Parent) = Parent.ID do
+           begin
+                 TreeElement.Parent := Parent;
+                 Read(TreeElement, TreeElement, Root, cnt);
+
+                 InitBranches();
+                    // Подъем вверх по стеку в поиске родителя
+      {%H-}      if cardinal(TreeElement.Parent) <> Parent.ID then exit;
+           end;
+           exit;    // Выход из проц. по прочтении ветки до конца
+        end;
+    end;
+end;
+
+function LoadData(const FileName : string; out cnt : cardinal):PTreeElement;
+var TreeElement : PTreeElement;
+begin
+     result := nil;
+     cnt := 0;
+
+     if not FileExists(fileName) then exit(nil);
+
+     AssignFile(F,FileName);
+     Reset(F);
+
+     if not Eof(F) then
+     try
+           Read(TreeElement, nil, result, cnt);
+     finally
+           CloseFile(F)
+     end;
+end;
+
+procedure Clear(Start : PTreeElement);
+var
+   Node : PTreeElement;
+begin
+    if Assigned(Start) then
+    begin
+        Node := Start.FirstChild;
+        Dispose(Start);
+
+        while(Node <> nil) do
+        begin
+            Clear(Node);
+            Node := Node.NextSibling;
+        end;
+    end;
+end;
+
+var Init,Next,Current : PTreeElement;
+    i : byte;
+    cnt : cardinal;
+    s : string;
+label NextQuestion;
+
+begin
+  // ConsoleFont;
+ //  DefaultSystemCodePage := 1251;
+  // SetConsoleOutputCP(1251);
+ //  SetConsoleCP(1251);
+   Init := nil;
+try
+   Init := Loaddata(ExtractFilePath(ParamStr(0)) + 'tmp.txt',cnt);
+
+   if not Assigned(Init) then
+   begin
+       New(Init);
+       FillChar(Init^,sizeof(TTreeElement),0);
+       cnt           := 1;
+       Init.ID       := cnt;
+       Init.Question := 'it catch mice';
+       Init.Answear  := 'Cat';
+   end;
+
+   Next          := nil;
+   Current       := Init;
+   WriteLn('Think an animal');
+   i := 0;
+
+   repeat
+NextQuestion:
+               WriteLn('Does ' + Current.Question + '?');
+
+               if Yes() then
+               begin
+                     WriteLN('This is - ' + Current.Answear + '. Guess?');
+                     if Yes then
+                     begin
+                           Writeln('Yes!, I am win!!!');
+                           Continue;
+                     end
+                     else begin
+                           i := 1;
+                           Next := Current.PYes;
+                     end;
+               end
+               else begin
+                     i := 2;
+                     Next := Current.PNo;
+               end;
+
+               if Next = nil then
+               begin
+                    inc(cnt);
+                    New(next);
+                    FillChar(Next^,sizeof(TTreeElement),0);
+
+                    if not Assigned(Current.FirstChild) then
+                                                    Current.FirstChild := Next;
+                    Next.Parent := Current;
+                    Next.ID     := cnt;
+                    WriteLn('I am yielding, Who is it?');
+                    ReadLn(Next.Answear);
+                   // Next.Answear := Next.Answear[1] + RightStr(Next.Answear,length(Next.Answear) - 1);
+                    WriteLn('What the difference between ' + Current.Answear + ' and ' + Next.Answear + '?');
+                    ReadLn(Next.Question);
+                  //  Next.Question := AnsiUpperCase(Next.Question[1]) + RightStr(Next.Question,length(Next.Question) - 1);
+                    case i of
+                         1 : Current.PYes := Next;
+                         2 : Current.PNo := Next;
+                    end;
+
+                    if Current.FirstChild <> Next then Current.FirstChild.NextSibling := Next;
+                    Current := Init;
+               end
+               else begin
+                    Current := Next;
+                    goto NextQuestion;
+               end;
+
+   until not NextPlay();
+   SaveData(ExtractFilePath(ParamStr(0)) + 'tmp.txt',init);
+finally
+    Clear(Init);
+end;
+
+end.

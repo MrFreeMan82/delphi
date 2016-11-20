@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016.11.17 12:30:46.832.pas,C:\Users\Dima\Documents\RAD Studio\Projects\Unit1.pas=D:\Dima\delphi\sqlLite\ulite.pas</Transaction>
+    <Transaction>2016.11.17 12:30:46.832.dfm,C:\Users\Dima\Documents\RAD Studio\Projects\Unit1.dfm=D:\Dima\delphi\sqlLite\ulite.dfm</Transaction>
+    <Transaction>2016.11.17 12:30:58.285.dproj,C:\Users\Dima\Documents\RAD Studio\Projects\Project1.dproj=D:\Dima\delphi\sqlLite\SQLLite.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

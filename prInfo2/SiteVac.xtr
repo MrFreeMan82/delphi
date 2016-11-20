@@ -1,0 +1,34 @@
+<XmlTransformation Version="1.0"><Transform Direction="ToCds"><SelectEach dest="DATAPACKET\ROWDATA\ROW" from="\VACANCIES\VAC"><Select dest="@VAC_ID" from="\VAC_ID"/><Select dest="@RUBR_ID" from="\RUBR_ID"/><Select dest="@VAC_NAME" from="\VAC_NAME"/><Select dest="@VAC_TEXT" from="\VAC_TEXT"/></SelectEach></Transform><XmlSchema RootName="VACANCIES"><![CDATA[<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="VACANCIES" type="VACANCIESType"/>
+  <xs:complexType name="VACANCIESType">
+    <xs:sequence>
+      <xs:element name="VAC" type="VACType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VAC" type="VACType"/>
+  <xs:complexType name="VACType">
+    <xs:sequence>
+      <xs:element name="VAC_ID" type="VAC_IDType"/>
+      <xs:element name="RUBR_ID" type="RUBR_IDType"/>
+      <xs:element name="VAC_NAME" type="VAC_NAMEType"/>
+      <xs:element name="VAC_TEXT" type="VAC_TEXTType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VAC_ID" type="VAC_IDType"/>
+  <xs:simpleType name="VAC_IDType">
+    <xs:restriction base="xs:integer"/>
+  </xs:simpleType>
+  <xs:element name="RUBR_ID" type="RUBR_IDType"/>
+  <xs:simpleType name="RUBR_IDType">
+    <xs:restriction base="xs:integer"/>
+  </xs:simpleType>
+  <xs:element name="VAC_NAME" type="VAC_NAMEType"/>
+  <xs:simpleType name="VAC_NAMEType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:element name="VAC_TEXT" type="VAC_TEXTType"/>
+  <xs:simpleType name="VAC_TEXTType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+</xs:schema>]]></XmlSchema><CdsSkeleton/><XslTransform/><Skeleton><![CDATA[<?xml version="1.0"?><DATAPACKET Version="2.0"><METADATA><FIELDS><FIELD attrname="VAC_ID"  fieldtype="string" WIDTH="10"/><FIELD attrname="RUBR_ID" fieldtype="string" WIDTH="10"/><FIELD attrname="VAC_NAME" fieldtype="string" WIDTH="35"/><FIELD attrname="VAC_TEXT" fieldtype="bin.hex" SUBTYPE="Text"/></FIELDS><PARAMS/></METADATA><ROWDATA/><METADATA><FIELDS><FIELD attrname="VAC_ID" fieldtype="string" WIDTH="2"/><FIELD attrname="RUBR_ID" fieldtype="string" WIDTH="2"/><FIELD attrname="VAC_NAME" fieldtype="string" WIDTH="100"/><FIELD attrname="VAC_TEXT" fieldtype="bin.hex" SUBTYPE="Text"/></FIELDS><PARAMS/></METADATA><ROWDATA/></DATAPACKET>
+]]></Skeleton></XmlTransformation>

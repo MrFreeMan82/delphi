@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016.11.04 21:16:52.052.pas,C:\Users\Dima\Documents\RAD Studio\Projects\Unit1.pas=D:\Dima\delphi\Clean\uClean.pas</Transaction>
+    <Transaction>2016.11.04 21:16:52.052.dfm,C:\Users\Dima\Documents\RAD Studio\Projects\Unit1.dfm=D:\Dima\delphi\Clean\uClean.dfm</Transaction>
+    <Transaction>2016.11.04 21:17:05.196.dproj,C:\Users\Dima\Documents\RAD Studio\Projects\Project1.dproj=D:\Dima\delphi\Clean\wash.dproj</Transaction>
+    <Transaction>2016.11.04 21:17:25.359.pas,D:\Dima\delphi\Clean\uClean.pas=D:\Dima\delphi\Clean\uWash.pas</Transaction>
+    <Transaction>2016.11.04 21:17:25.359.dfm,D:\Dima\delphi\Clean\uClean.dfm=D:\Dima\delphi\Clean\uWash.dfm</Transaction>
+    <Transaction>2016.11.05 11:23:14.080.pas,D:\Dima\delphi\Clean\Unit1.pas=D:\Dima\delphi\Clean\uOperator.pas</Transaction>
+    <Transaction>2016.11.05 11:23:14.098.dfm,D:\Dima\delphi\Clean\Unit1.dfm=D:\Dima\delphi\Clean\uOperator.dfm</Transaction>
+    <Transaction>2016.11.05 11:38:13.500.pas,D:\Dima\delphi\Clean\Unit1.pas=D:\Dima\delphi\Clean\uLogin.pas</Transaction>
+    <Transaction>2016.11.05 11:38:13.500.dfm,D:\Dima\delphi\Clean\Unit1.dfm=D:\Dima\delphi\Clean\uLogin.dfm</Transaction>
+    <Transaction>2016.11.05 11:39:56.784.pas,D:\Dima\delphi\Clean\Unit1.pas=D:\Dima\delphi\Clean\uSelectUser.pas</Transaction>
+    <Transaction>2016.11.05 11:39:56.784.dfm,D:\Dima\delphi\Clean\Unit1.dfm=D:\Dima\delphi\Clean\uSelectUser.dfm</Transaction>
+    <Transaction>2016.11.05 17:28:13.968.pas,D:\Dima\delphi\Clean\Unit1.pas=D:\Dima\delphi\Clean\uData.pas</Transaction>
+    <Transaction>2016.11.05 17:28:13.968.dfm,D:\Dima\delphi\Clean\Unit1.dfm=D:\Dima\delphi\Clean\uData.dfm</Transaction>
+    <Transaction>2016.11.06 08:27:13.471.pas,D:\Dima\delphi\Clean\accessRights.pas=</Transaction>
+    <Transaction>2016.11.06 08:27:43.150.pas,D:\Dima\delphi\Clean\Unit1.pas=D:\Dima\delphi\Clean\uAccessRightRule.pas</Transaction>
+    <Transaction>2016.11.06 12:09:20.253.pas,D:\Dima\delphi\Clean\Unit1.pas=D:\Dima\delphi\Clean\uGlobals.pas</Transaction>
+    <Transaction>2016.11.06 12:36:01.313.pas,D:\Dima\delphi\Clean\Unit1.pas=D:\Dima\delphi\Clean\uWashDetail.pas</Transaction>
+    <Transaction>2016.11.06 12:36:01.313.dfm,D:\Dima\delphi\Clean\Unit1.dfm=D:\Dima\delphi\Clean\uWashDetail.dfm</Transaction>
+    <Transaction>2016.11.09 09:11:35.355.pas,D:\Dima\delphi\Clean\Unit1.pas=D:\Dima\delphi\Clean\uTest.pas</Transaction>
+    <Transaction>2016.11.09 09:11:35.355.dfm,D:\Dima\delphi\Clean\Unit1.dfm=D:\Dima\delphi\Clean\uTest.dfm</Transaction>
+    <Transaction>2016.11.09 12:14:45.585.pas,D:\Dima\delphi\Clean\Unit1.pas=D:\Dima\delphi\Clean\uLoockUpList.pas</Transaction>
+    <Transaction>2016.11.09 12:14:45.585.dfm,D:\Dima\delphi\Clean\Unit1.dfm=D:\Dima\delphi\Clean\uLoockUpList.dfm</Transaction>
+    <Transaction>2016.11.09 13:39:41.961.pas,D:\Dima\delphi\Clean\Unit1.pas=D:\Dima\delphi\Clean\uNewOrganization.pas</Transaction>
+    <Transaction>2016.11.09 13:39:42.040.dfm,D:\Dima\delphi\Clean\Unit1.dfm=D:\Dima\delphi\Clean\uNewOrganization.dfm</Transaction>
+    <Transaction>2016.11.09 13:56:56.836.pas,D:\Dima\delphi\Clean\uLoockUpList.pas=</Transaction>
+    <Transaction>2016.11.09 13:56:56.836.dfm,D:\Dima\delphi\Clean\uLoockUpList.dfm=</Transaction>
+    <Transaction>2016.11.09 19:58:57.823.pas,D:\Dima\delphi\Clean\Unit1.pas=D:\Dima\delphi\Clean\uNewDriver.pas</Transaction>
+    <Transaction>2016.11.09 19:58:57.823.dfm,D:\Dima\delphi\Clean\Unit1.dfm=D:\Dima\delphi\Clean\uNewDriver.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

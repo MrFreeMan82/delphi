@@ -1,0 +1,7 @@
+1;it catch mice;cat;5;2;0;2;0
+2;it like meat;dog;3;4;1;3;5
+3;it has colored lines;tiger;0;0;2;0;4
+4;it live in a water;fish;6;0;2;6;0
+6;it big;shark;0;0;4;0;0
+5;it reptile;snake;0;7;1;7;0
+7;it can fly;it owl;0;0;5;0;0

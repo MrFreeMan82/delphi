@@ -1,0 +1,1 @@
+<ParaStyle:Rubrica>{RUB_NAME}

@@ -1,0 +1,28 @@
+// Для распространения программы нужно распространять и следующие библиотеки
+// midas.dll, fbclient.dll, dbxfb.dll
+program wash;
+
+uses
+  Forms,
+  Crtl,
+  MidasLib,
+  uWash in 'uWash.pas' {frmMain},
+  uOperator in 'uOperator.pas' {frmOperator},
+  uLogin in 'uLogin.pas' {frmLogin},
+  uSelectUser in 'uSelectUser.pas' {frmSelectUser},
+  uData in 'uData.pas' {data: TDataModule},
+  uAccessRightRule in 'uAccessRightRule.pas',
+  uGlobals in 'uGlobals.pas',
+  uWashDetail in 'uWashDetail.pas' {frmWashDetail},
+  uTest in 'uTest.pas' {Form1};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(Tdata, data);
+  Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

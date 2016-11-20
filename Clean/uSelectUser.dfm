@@ -1,0 +1,207 @@
+object frmSelectUser: TfrmSelectUser
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = #1042#1099#1073#1077#1088#1080#1090#1077' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1103':'
+  ClientHeight = 302
+  ClientWidth = 594
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 16
+  object Label1: TLabel
+    Left = 8
+    Top = 8
+    Width = 88
+    Height = 16
+    Caption = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1100':'
+  end
+  object Label2: TLabel
+    Left = 303
+    Top = 8
+    Width = 62
+    Height = 16
+    Caption = #1054#1087#1077#1088#1072#1090#1086#1088':'
+  end
+  object grdUser: TDBGrid
+    Left = 8
+    Top = 30
+    Width = 285
+    Height = 219
+    DataSource = dsUser
+    Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'U_FIO'
+        Title.Alignment = taCenter
+        Title.Caption = #1048#1084#1103
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 125
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'UT_NAME'
+        Title.Alignment = taCenter
+        Title.Caption = #1058#1080#1087
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 91
+        Visible = True
+      end>
+  end
+  object grdOperator: TDBGrid
+    Left = 303
+    Top = 30
+    Width = 285
+    Height = 219
+    DataSource = dsOperator
+    Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'OP_NAME'
+        Title.Alignment = taCenter
+        Title.Caption = #1048#1084#1103
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 208
+        Visible = True
+      end>
+  end
+  object btOk: TBitBtn
+    Left = 416
+    Top = 269
+    Width = 83
+    Height = 25
+    DoubleBuffered = True
+    Kind = bkOK
+    ParentDoubleBuffered = False
+    TabOrder = 2
+  end
+  object btCancel: TBitBtn
+    Left = 505
+    Top = 269
+    Width = 83
+    Height = 25
+    Caption = #1054#1090#1084#1077#1085#1072
+    DoubleBuffered = True
+    Kind = bkCancel
+    ParentDoubleBuffered = False
+    TabOrder = 3
+  end
+  object qUser: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT u.u_id, u.ut_id, u.u_fio, ut.ut_name'
+      'FROM "USER" u'
+      'LEFT JOIN USER_TYPE ut ON (u.ut_id = ut.ut_id)')
+    SQLConnection = data.connection
+    Left = 32
+    Top = 96
+  end
+  object cdsUser: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'prvUser'
+    AfterScroll = cdsUserAfterScroll
+    Left = 136
+    Top = 96
+    object cdsUserU_ID: TIntegerField
+      FieldName = 'U_ID'
+    end
+    object cdsUserUT_ID: TIntegerField
+      FieldName = 'UT_ID'
+    end
+    object cdsUserU_FIO: TStringField
+      FieldName = 'U_FIO'
+      Size = 256
+    end
+    object cdsUserUT_NAME: TStringField
+      FieldName = 'UT_NAME'
+      Size = 64
+    end
+  end
+  object prvUser: TDataSetProvider
+    DataSet = qUser
+    Left = 80
+    Top = 96
+  end
+  object dsUser: TDataSource
+    DataSet = cdsUser
+    Left = 192
+    Top = 96
+  end
+  object qOperator: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'us_id'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT o.op_id, o.op_name'
+      'FROM OPERATOR o'
+      'LEFT JOIN USER_ACCESS ua ON (ua.u_id = o.op_id)'
+      'WHERE ua.u_id = :us_id')
+    SQLConnection = data.connection
+    Left = 320
+    Top = 96
+  end
+  object prvOperator: TDataSetProvider
+    DataSet = qOperator
+    Left = 376
+    Top = 96
+  end
+  object cdsOperator: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'prvOperator'
+    Left = 440
+    Top = 96
+    object cdsOperatorOP_ID: TIntegerField
+      FieldName = 'OP_ID'
+    end
+    object cdsOperatorOP_NAME: TStringField
+      FieldName = 'OP_NAME'
+      Size = 256
+    end
+  end
+  object dsOperator: TDataSource
+    DataSet = cdsOperator
+    Left = 504
+    Top = 96
+  end
+end

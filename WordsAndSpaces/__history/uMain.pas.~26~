@@ -1,0 +1,134 @@
+unit uMain;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls;
+
+type
+  TState = (stInput, stMaybeWAS, stOneLetterWord, stWord, stDivider, stFin);
+
+  TfrmWAS = class(TForm)
+    input: TMemo;
+    output: TMemo;
+    btBegin: TButton;
+    procedure btBeginClick(Sender: TObject);
+  private
+    { Private declarations }
+    pos,len: integer;
+    ch,divider: char;
+    word: string;
+    state, lastState: TState;
+
+    procedure wordProc(ch: char);
+    procedure changeState(newState: TState);
+    function isLetter(ch:char): boolean;
+    function isDivider(ch:char): boolean;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmWAS: TfrmWAS;
+implementation
+
+{$R *.dfm}
+
+{ TForm1 }
+
+procedure TfrmWAS.wordProc(ch: char);
+begin
+     case state of
+       stInput:
+          if isLetter(ch) then
+          begin
+               word := ch;
+               changeState(stMaybeWAS);
+               changeState(stInput);
+          end
+          else if isDivider(ch)then
+          begin
+              divider := ch;
+              changeState(stDivider);
+          end;
+       stMaybeWAS:
+          if isLetter(ch) and (lastState = stOneLetterWord) then
+          begin
+               //word := word + ch;
+               changeState(stFin);
+               changeState(stInput);
+          end
+          else if isLetter(ch) then
+          begin
+              word := word + ch;
+              changeState(stWord);
+              changeState(stInput)
+          end
+          else if ch = ' ' then
+          begin
+               changeState(stOneLetterWord);
+               changeState(stInput);
+          end
+          else if isDivider(ch)then
+          begin
+              divider := ch;
+              changeState(stDivider);
+          end;
+stOneLetterWord:
+          if isLetter(ch) then
+          begin
+              changeState(stMayBeWAS);
+              //changeState(stInput);
+          end
+          else if isDivider(ch)then
+          begin
+              divider := ch;
+              changeState(stDivider);
+          end;
+       stWord: ;
+
+       stDivider:;
+       stFin: ;
+     end;
+end;
+
+procedure TfrmWAS.btBeginClick(Sender: TObject);
+begin
+     pos := 0;
+     len := length(input.Text);
+     ch := trim(input.Text)[pos];
+
+     while true do
+     begin
+          wordProc(ch);
+
+          if state = stInput then
+          begin
+              if pos > len then break;
+              
+              inc(pos);
+              ch :=input.Text[pos];
+
+              changeState(lastState);
+          end;
+     end;
+end;
+
+procedure TfrmWAS.changeState(newState: TState);
+begin
+    lastState := state;
+    state := newState;
+end;
+
+function TfrmWAS.isDivider(ch: char): boolean;
+begin
+    result := charInSet(ch, ['.', ',', ':', ';', '-', '!', '?', #0]);
+end;
+
+function TfrmWAS.isLetter(ch: char): boolean;
+begin
+     result := charInSet(ch, ['a'..'z', 'A'..'Z', 'à'..'ÿ', 'À'..'ß', '0'..'9']);
+end;
+
+end.

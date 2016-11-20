@@ -1,0 +1,151 @@
+unit uData;
+
+interface
+
+uses
+  SysUtils, Classes, WideStrings, DBXFirebird, DB, SqlExpr, FMTBcd, DBClient,
+  Provider;
+
+type
+  Tdata = class(TDataModule)
+    connection: TSQLConnection;
+    qAccessRight: TSQLQuery;
+    qAccessRightARR_WINDOW_NAME: TStringField;
+    qAccessRightARR_ORDER: TSmallintField;
+    qAccessRightARR_NAME: TStringField;
+    qAccessRightARR_USER_TYPES: TStringField;
+    qAccessRightARR_TARGET_OBJECT_NAME: TStringField;
+    qAccessRightARR_CHECK_OBJECT_NAME: TStringField;
+    qAccessRightARR_CHECK_MODE: TStringField;
+    qAccessRightARR_ACTION: TStringField;
+    qAccessRightARR_CHECK_OBJECT_VALUE: TSingleField;
+    qOrganization: TSQLQuery;
+    qDriver: TSQLQuery;
+    qCar: TSQLQuery;
+    qTank: TSQLQuery;
+    prvOrganization: TDataSetProvider;
+    cdsOrganization: TClientDataSet;
+    dsOrganization: TDataSource;
+    cdsOrganizationORG_ID: TIntegerField;
+    cdsOrganizationORGT_ID: TIntegerField;
+    cdsOrganizationORG_NAME: TStringField;
+    cdsOrganizationORG_TEL: TStringField;
+    prvDriver: TDataSetProvider;
+    cdsDriver: TClientDataSet;
+    dsDriver: TDataSource;
+    cdsDriverD_ID: TIntegerField;
+    cdsDriverORG_ID: TIntegerField;
+    cdsDriverD_NAME: TStringField;
+    cdsDriverD_SECNAME: TStringField;
+    cdsDriverD_THNAME: TStringField;
+    cdsDriverD_TEL: TStringField;
+    prvCar: TDataSetProvider;
+    cdsCar: TClientDataSet;
+    dsCar: TDataSource;
+    cdsCarC_ID: TIntegerField;
+    cdsCarD_ID: TIntegerField;
+    cdsCarC_NUM1: TStringField;
+    cdsCarC_NUM2: TIntegerField;
+    prvTank: TDataSetProvider;
+    cdsTank: TClientDataSet;
+    dsTank: TDataSource;
+    cdsTankT_ID: TIntegerField;
+    cdsTankT_NUM: TStringField;
+    cdsTankT_HOLE_CNT: TIntegerField;
+    dsOrgType: TDataSource;
+    cdsOrgType: TClientDataSet;
+    prvOrgType: TDataSetProvider;
+    qOrgType: TSQLQuery;
+    cdsOrgTypeORGT_ID: TIntegerField;
+    cdsOrgTypeORGT_NAME: TStringField;
+    cdsCarCARNUM: TStringField;
+    cdsOrganizationORGT_NAME: TStringField;
+    qNextGenValue: TSQLQuery;
+    qLiquid: TSQLQuery;
+    prvLiquid: TDataSetProvider;
+    cdsLiquid: TClientDataSet;
+    dsLiquid: TDataSource;
+    cdsLiquidLQ_ID: TIntegerField;
+    cdsLiquidLQ_NAME: TStringField;
+    cdsLiquidLQ_PRICE: TFloatField;
+    qFNames: TSQLQuery;
+    prvFNames: TDataSetProvider;
+    cdsFNames: TClientDataSet;
+    dsFNames: TDataSource;
+    cdsFNamesFN_NAME: TStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function ConnectDB(const dbName: string): boolean;
+    procedure OpenDictionary();
+    procedure RefreshDictionary(dataSet: TClientDataSet);
+    procedure filterDictionary(dataSet: TClientDataSet; const filter: string);
+    function getGeneratorValue(GeneratorName: string; next: boolean = false):integer;
+  end;
+
+var data: Tdata;
+
+implementation
+
+{$R *.dfm}
+
+function Tdata.ConnectDB(const dbName: string): boolean;
+begin
+    connection.Connected := false;
+    connection.Params.Values['Database'] := dbName;
+    try
+        connection.Connected := true;
+        result := true;
+    except
+        result := false
+    end;
+end;
+
+procedure Tdata.filterDictionary(dataSet: TClientDataSet; const filter: string);
+begin
+    dataSet.Filtered := false;
+    dataSet.Filter := filter;
+    dataSet.Filtered := true;
+end;
+
+function Tdata.getGeneratorValue(GeneratorName: string; next: boolean = false): integer;
+var s: string;
+begin
+    s := 'SELECT GEN_ID(' + GeneratorName;
+    if next then s := s + ',1)' else s := s + ',0)';
+    s := s + 'AS ID FROM rdb$database';
+
+    qNextGenValue.Close;
+    qNextGenValue.SQL.Clear;
+		qNextGenValue.SQL.Text := s;
+		qNextGenValue.Open;
+		result := qNextGenValue.FieldByName('ID').AsInteger;
+end;
+
+procedure Tdata.OpenDictionary;
+begin
+// Dictionary open
+     cdsOrganization.Close;
+     cdsOrganization.Open;
+     cdsDriver.Close;
+     cdsDriver.Open;
+     cdsCar.Close;
+     cdsCar.Open;
+     cdsTank.Close;
+     cdsTank.Open;
+     cdsOrgType.Close;
+     cdsOrgType.Open;
+     cdsLiquid.Close;
+     cdsLiquid.Open;
+     cdsFNames.Close;
+     cdsFNames.Open;
+
+end;
+
+procedure Tdata.RefreshDictionary(dataSet: TClientDataSet);
+begin
+      if Assigned(dataSet) then dataSet.Refresh;
+end;
+
+end.

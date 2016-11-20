@@ -1,0 +1,1 @@
+d:\Progra~1\Borland\Delphi7\bin\dcc32  prInfo.dpr -UMyLib;TiffLib;EhLib;Word;GraphicEx -RD:\Progra~1\Borland\Delphi7\Lib -$J+

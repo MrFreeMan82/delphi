@@ -1,0 +1,674 @@
+unit uformula;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, Graphics;
+
+procedure setCanvas(canva: TCanvas);
+procedure DrawFormula();
+function locateChainAtPos(point: TPoint): boolean;
+procedure AppendFormula(ch: char);
+procedure createNewChain(point: TPoint);
+function ConverttoString(): string;
+
+
+implementation
+
+const FONT_NAME = 'Courier New';
+
+type
+{ TFormula }
+
+TFormula = class
+     h,w:integer;
+     rect: TRect;
+     font: Tfont;
+     ch: char;
+     next, parent, owner: TFormula;
+     upperIdx: TFormula;
+     function insert(what: char): TFormula;
+     function add(what: char): TFormula;
+     procedure prepareUpperIndex();
+     procedure upperIndex();
+     procedure DrawUpperIndex();
+     function getChainWidth(start: TFormula): integer;
+     procedure wideRectRight(start: TFormula; space: integer);
+     procedure Draw();virtual;
+     function locate(point:TPoint): boolean;virtual;
+     procedure prepare();virtual;
+     constructor create(sym: char);
+     destructor destroy; override;
+end;
+
+{ TFormulaChar }
+
+TFormulaChar = class (TFormula)
+    procedure prepare();override;
+    procedure Draw();override;
+    function locate(point:TPoint): boolean;override;
+    constructor create(sym: char);
+end;
+
+{ TFrac }
+
+TFrac = class (TFormula)
+    numerator, denominator: TFormula;
+    procedure prepare();override;
+    procedure Draw();override;
+    function locate(point:TPoint): boolean;override;
+    constructor create(sym: char);
+end;
+
+{ TParenthes }
+{
+TParenthes = class(TFormula)
+    beginF, endF, value: TFormula;
+    procedure prepare();override;
+    procedure Draw();override;
+    function locate(point:TPoint): boolean;override;
+    constructor create(sym: char);
+end; }
+
+
+const FORM_INIT_LEN = 100;
+      FONT_SIZE = 16;
+
+var fChains: array of Tformula;
+    fix: integer = 0;
+
+    selectedChain: TFormula = nil;
+
+    canvas: TCanvas;
+    flUp: boolean = false;
+    flFrac: boolean = false;    // используется для уменьшения значения входящих в дробь
+
+procedure setCanvas(canva: TCanvas);
+begin
+     canvas := canva;
+end;
+
+procedure DrawFormula();
+var i: integer;
+    n: TFormula;
+begin
+     i := 0;
+     while assigned(fChains[i]) do
+     begin
+          n := fChains[i];
+          n.prepare();
+          n.Draw();
+
+          inc(i);
+     end;
+end;
+
+function locateChainStart(from: TFormula): TFormula;
+begin
+     while assigned(from.parent) do from := from.parent;
+     result := from;
+end;
+
+function locateChainAtPos(point: TPoint): boolean;
+var i: integer;
+begin
+     selectedChain := nil;
+     result := false;
+
+     i := 0;
+     while assigned(fChains[i]) do
+     begin
+          if fChains[i].locate(point) then exit(true);
+          inc(i);
+     end;
+end;
+
+procedure AppendFormula(ch: char);
+begin
+     if not assigned(selectedChain) then exit;
+
+     if selectedChain.next = nil then
+          selectedChain := selectedChain.add(ch)
+     else
+          selectedChain := selectedChain.insert(ch);
+end;
+
+procedure createNewChain(point: TPoint);
+begin
+     if fix = length(fChains) then setLength(fChains, length(fChains) + FORM_INIT_LEN);
+     fChains[fix] := TFormula.Create(#0);
+     with fChains[fix] do
+     begin
+          rect.Top := point.y;
+          rect.Left := point.x;
+          rect.Right := rect.Left + w;
+          rect.Bottom := rect.Top + h;
+     end;
+     selectedChain := fChains[fix];
+     inc(fix);
+end;
+
+function doToString(start: TFormula): string;
+begin
+     result := '';
+     while assigned(start) do
+     begin
+          if start is TFormulaChar then
+          begin
+               result += start.ch;
+               if assigned(start.upperIdx) then result += doToString(start.upperIdx);
+          end
+          else if start is TFrac then
+          begin
+               result += doToString(TFrac(start).numerator);
+               result += '/';
+               result += doToString(TFrac(start).denominator);
+          end;
+
+          start := start.next;
+     end;
+end;
+
+function ConverttoString: string;
+var i: integer;
+    n: TFormula;
+begin
+    result := '';
+
+    i := 0;
+    n := fChains[i];
+    while assigned(n) do
+    begin
+         result += doToString(n) + ';';
+
+         inc(i);
+         n := fChains[i];
+    end;
+end;
+
+{ TFormula }
+
+function getFontSize():integer;
+begin
+     result := FONT_SIZE;
+     if flFrac then result := trunc(result / 1.2);
+     if flUp then result := trunc(result / 1.5);
+end;
+
+function TFormula.insert(what: char): TFormula;
+var f: TFormula;
+begin
+    case what of
+         '/':
+         begin
+              f := TFrac.create(what);
+              f.parent := self;
+              f.next := next;
+              if assigned(next) then next.parent := f;
+              self.next := f;
+         end;
+
+         '^':
+         begin
+              upperIndex();
+              f := upperIdx;
+         end;
+
+         else begin
+              f := TFormulaChar.create(what);
+              f.parent := self;
+              f.next := next;
+              if assigned(next) then next.parent := f;
+              self.next := f;
+         end;
+    end;
+    result := f;
+end;
+
+function TFormula.add(what: char): TFormula;
+begin
+     case what of
+          '/':
+          begin
+               next := TFrac.create(what);
+               next.parent := self;
+               next.owner := self.owner;
+          end;
+
+          '^':
+          begin
+               upperIndex();
+               exit(upperIdx);
+          end;
+
+          else begin
+               next := TFormulaChar.Create(what);
+               next.parent := self;
+               next.owner := self.owner;
+          end;
+     end;
+     result := next;
+end;
+
+procedure TFormula.prepareUpperIndex;
+begin
+   if  upperIdx = nil then exit;
+   flUp := true;
+
+   upperIdx.font.Size := FONT_SIZE div 2;
+   canvas.Font := upperIdx.font;
+   canvas.GetTextSize(upperIdx.ch, upperIdx.w, upperIdx.h);
+
+   upperIdx.rect.Bottom := rect.Top;
+   upperIdx.rect.Top := upperIdx.rect.Bottom - upperIdx.h div 2;
+   upperIdx.rect.Left := rect.Right;
+   upperIdx.rect.Right := upperIdx.rect.Left + upperIdx.w;
+
+   if assigned(upperIdx.next) then upperIdx.next.prepare();
+   flUp := false;
+end;
+
+procedure TFormula.upperIndex;
+begin
+    upperIdx := TFormula.create(#0);
+end;
+
+procedure TFormula.DrawUpperIndex;
+var n: TFormula;
+begin
+     n := upperIdx;
+     while assigned(n) do
+     begin
+          n.Draw();
+          n := n.next;
+     end;
+end;
+
+function TFormula.getChainWidth(start: TFormula): integer;
+begin
+     result := 0;
+     while assigned(start) do
+     begin
+          if (start.ch <> #0) or (start.ch = #0) and (start.next = nil) then result += start.w; //canvas.GetTextWidth(ch);
+
+          start := start.next;
+     end;
+end;
+
+procedure TFormula.wideRectRight(start: TFormula; space: integer);
+var n: TFormula;
+begin
+      if start = nil then exit;
+      n := start;
+      while assigned(n.next) do n := n.next;
+
+      rect.Right := n.rect.Right + space;
+end;
+
+procedure TFormula.Draw;
+begin
+     if (self = selectedChain) then
+     begin
+          canvas.Font := font;
+          canvas.Pen.Color := clBlack;
+          canvas.Pen.Width := 1;
+          canvas.Pen.Style := psDot;
+          canvas.Brush.Style:= bsClear;
+
+          canvas.Rectangle(rect)
+     end
+     else
+     if (ch = #0) and (next = nil) then
+     begin
+          canvas.Font := font;
+          canvas.Pen.Color := clBlack;
+          canvas.Pen.Width := 1;
+          canvas.Pen.Style := psSolid;
+          canvas.Brush.Style:= bsClear;
+
+          canvas.Rectangle(rect)
+     end;
+
+     if assigned(next) then next.Draw();
+end;
+
+function TFormula.locate(point: TPoint): boolean;
+begin
+     result := (point.y >= rect.Top) and (point.y <= rect.Bottom) and
+               (point.x >= rect.Left) and (point.x <= rect.Right);
+
+     if result then
+     begin
+          if (ch = #0) and (self.next <> nil) then result := false
+          else begin
+               selectedChain := self;
+          end;
+     end;
+
+     if not result and assigned(upperIdx) then result := upperIdx.locate(point);
+     if not result and assigned(next) then result := next.locate(point);
+end;
+
+procedure TFormula.prepare;
+begin
+   if assigned(upperIdx) then upperIdx.prepare();
+   if assigned(next) then next.prepare();
+end;
+
+constructor TFormula.create(sym: char);
+begin
+     owner := nil;
+     parent := nil;
+     next := nil;
+     upperIdx := nil;
+     ch := sym;
+     Font := TFont.Create;
+     Font.Name := FONT_NAME;
+     font.Size := FONT_SIZE;
+     canvas.Font := font;
+     canvas.GetTextSize(ch, w, h);
+end;
+
+destructor TFormula.destroy;
+begin
+  font.Free;
+  inherited destroy;
+end;
+
+{ TFormulaChar }
+
+procedure TFormulaChar.prepare;
+begin
+     font.Size := getFontSize();
+     canvas.Font := font;
+     canvas.GetTextSize(ch, w, h);
+
+     if parent is TFrac then
+     begin
+          rect.Top := parent.rect.Top + (parent.h div 4);
+     end
+     else begin
+          rect.Top := parent.rect.Top;
+     end;
+
+     if parent.ch = #0 then rect.Left := parent.rect.Left else rect.Left := parent.rect.Right;
+     rect.Right := rect.Left + w;
+     rect.Bottom := rect.Top + h;
+
+     prepareUpperIndex();
+     wideRectRight(upperIdx, 0);
+
+     inherited prepare();
+end;
+
+procedure TFormulaChar.Draw();
+begin
+     canvas.Font := font;
+     canvas.Pen.Color := clBlack;
+     canvas.Pen.Width := 1;
+     canvas.Brush.Style:= bsClear;
+     canvas.Pen.Style := psSolid;
+
+     canvas.TextOut(rect.Left, rect.Top, ch);
+
+     DrawUpperIndex();
+     inherited Draw();
+end;
+
+function TFormulaChar.locate(point: TPoint): boolean;
+begin
+     result := false;
+     if assigned(upperIdx) then result := upperIdx.locate(point);
+     if not result then result := inherited locate(point);
+     if not result and assigned(next) then result := next.locate(point);
+end;
+
+constructor TFormulaChar.create(sym: char);
+begin
+   inherited create(sym);
+end;
+
+{ TFrac }
+
+procedure TFrac.prepare;
+var nw, dw: integer;
+begin
+     font.Size := getFontSize();
+     canvas.Font := font;
+     canvas.GetTextSize(ch, w, h);
+     h *= 2;
+
+     if (parent is TFrac) then
+     begin
+          rect.Top := parent.rect.Top
+     end
+     else rect.Top  := parent.rect.Top - (h div 4);
+
+     if parent.ch = #0 then rect.Left := parent.rect.Left else rect.Left := parent.rect.Right;
+     rect.Right := rect.Left + w;
+     rect.Bottom := rect.Top + h;
+
+     flFrac := true;
+     with numerator do
+     begin
+          font.Size := self.font.Size;//trunc(FONT_SIZE / 1.2);
+          canvas.Font := font;
+          canvas.GetTextSize(ch, w, h);
+          rect.Top := self.rect.Top;
+          rect.Left := self.rect.Left;
+          rect.Right := rect.Left + w;
+          rect.Bottom := rect.Top + h;
+          prepare();
+     end;
+
+     with denominator do
+     begin
+          font.Size := self.font.Size;//trunc(FONT_SIZE / 1.2);
+          w := numerator.w;
+          h := numerator.h;
+          rect.Bottom := self.rect.Bottom;
+          rect.Top := rect.Bottom - h;
+          rect.Left := self.rect.Left;
+          rect.Right := rect.Left + w;
+          prepare();
+     end;
+
+     nw := getChainWidth(numerator);
+     dw := getChainWidth(denominator);
+
+     if dw >= nw then
+     with numerator do
+     begin
+          self.rect.Right := self.rect.Left + dw;
+          self.w := dw;
+          rect.Left := rect.Left + ((dw - nw) div 2);
+          rect.Right := rect.Left + w;
+          prepare();
+     end
+     else with denominator do
+     begin
+          self.rect.Right := self.rect.Left + nw;
+          self.w := nw;
+          rect.Left := rect.Left + ((nw - dw) div 2);
+          rect.Right := rect.Left + w;
+          prepare();
+     end;
+     flFrac := false;
+
+     prepareUpperIndex();
+     wideRectRight(upperIdx, 0);
+
+     if assigned(next) then next.prepare()
+end;
+
+procedure TFrac.Draw;
+var n,d: TFormula;
+begin
+   canvas.Pen.Color := clBlack;
+   canvas.Pen.Width := 1;
+   canvas.Brush.Style:= bsClear;
+   canvas.Pen.Style := psSolid;
+
+   canvas.Line(rect.Left, rect.Top - 2 + h div 2, rect.Left + w, rect.Top - 2 + h div 2);
+
+   n := numerator;
+   d := denominator;
+   while assigned(n) or assigned(d) do
+   begin
+        if assigned(n) then
+        begin
+             n.Draw();
+             n := n.next;
+        end;
+
+        if assigned(d) then
+        begin
+             d.Draw();
+             d := d.next;
+        end;
+   end;
+
+   DrawUpperIndex();
+
+   inherited Draw();
+end;
+
+function TFrac.locate(point: TPoint): boolean;
+var n,d: TFormula;
+begin
+     result := false;
+     n := numerator;
+     d := denominator;
+     if assigned(n) then result := n.locate(point);
+
+     if not result and assigned(d) then result := d.locate(point);
+
+     if not result then result := inherited locate(point);
+
+     if not result and assigned(next) then result := next.locate(point);
+end;
+
+constructor TFrac.create(sym: char);
+begin
+   inherited create(sym);
+   parent := nil;
+   ch := sym;
+   numerator := TFormula.create(#0);
+   numerator.owner := self;
+   denominator := TFormula.create(#0);
+   denominator.owner := self;
+end;
+
+{ TParenthes }
+{
+procedure TParenthes.prepare;
+begin
+     font.Size := getFontSize();
+     canvas.Font := font;
+     canvas.GetTextSize(ch, w, h);
+
+     if parent is TFrac then
+     begin
+          rect.Top := parent.rect.Top + (parent.h div 4);
+     end
+     else begin
+          rect.Top := parent.rect.Top;
+     end;
+     if parent.ch = #0 then rect.Left := parent.rect.Left else rect.Left := parent.rect.Right;
+     rect.Right := rect.Left + w;
+     rect.Bottom := rect.Top + h;
+
+     with beginF do
+     begin
+          font.Size := getFontSize();
+          canvas.Font := font;
+          canvas.GetTextSize(ch, w, h);
+          rect.Top := self.rect.Top;
+          rect.Left := self.rect.Left;
+          rect.Right := rect.Left + w;
+          rect.Bottom := rect.Top + h;
+     end;
+
+     with value do
+     begin
+          font.Size := getFontSize();
+          canvas.Font := font;
+          canvas.GetTextSize(ch, w, h);
+          rect.Top := beginF.rect.Top;
+          rect.Left := beginF.rect.Right;
+          rect.Right := rect.Left + w;
+          rect.Bottom := rect.Top + h;
+          prepare();
+     end;
+     wideRectRight(value, 0);
+
+     with endF do
+     begin
+          font.Size := getFontSize();
+          canvas.Font := font;
+          canvas.GetTextSize(ch, w, h);
+          rect.Right := self.rect.Right + w;
+          rect.Bottom := self.rect.Bottom;
+          rect.Top := rect.Bottom - h;
+          rect.Left := rect.Right - w;
+     end;
+     wideRectRight(endF, 0);
+end;
+
+procedure TParenthes.Draw;
+var n: TFormula;
+begin
+     beginF.Draw();
+
+     n := value;
+     while assigned(n) do
+     begin
+          n.Draw();
+
+          n := n.next;
+     end;
+
+     endF.Draw();
+
+     DrawUpperIndex();
+     inherited Draw();
+end;
+
+function TParenthes.locate(point: TPoint): boolean;
+begin
+     result := false;
+     if assigned(upperIdx) then result := upperIdx.locate(point);
+    // if not result then result := beginF.locate(point);
+    // if not result then result := endF.locate(point);
+     if not result then result := value.locate(point);
+     if not result then result := inherited locate(point);
+     if not result and assigned(next) then result := next.locate(point);
+end;
+
+constructor TParenthes.create(sym: char);
+begin
+     inherited create(sym);
+
+     parent := nil;
+     next := nil;
+     ch := sym;
+
+     beginF := TFormulaChar.create('(');
+     endF   := TFormulaChar.create(')');
+     value  := TFormula.create(#0);
+end;
+ }
+initialization
+             setLength(fChains, FORM_INIT_LEN);
+
+             // Нет поддержки дробей с вложеными дробями
+
+             //ToDo: Сделать скобки отдельным классом
+             // добавить поле владелец.
+             // Например: дробь, для числ и знамен владелец яв дробь
+             // при добавлении в числ или знамен вызывать проц после добавления владельца
+             // но сначала вызывать собственную,если у владельца есть свой владелец то вызывать его проц, и только затем далее.
+end.
+
