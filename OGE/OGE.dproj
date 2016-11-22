@@ -62,6 +62,9 @@
 				<Form>frmTests</Form>
 			</DCCReference>
 			<DCCReference Include="uGlobal.pas"/>
+			<DCCReference Include="uTheme.pas">
+				<Form>frmTheme</Form>
+			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

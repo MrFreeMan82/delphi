@@ -34,8 +34,6 @@ object frmAdmin: TfrmAdmin
       RowCount = 2
       Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing]
       TabOrder = 0
-      ExplicitTop = 41
-      ExplicitHeight = 126
       ColWidths = (
         37
         497)
@@ -48,8 +46,6 @@ object frmAdmin: TfrmAdmin
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitLeft = 1
-      ExplicitTop = 9
       object btAddModule: TSpeedButton
         Left = 217
         Top = 0
@@ -80,7 +76,7 @@ object frmAdmin: TfrmAdmin
     TabOrder = 1
     object Panel1: TPanel
       Left = 2
-      Top = 15
+      Top = 18
       Width = 571
       Height = 24
       Align = alTop
@@ -93,21 +89,20 @@ object frmAdmin: TfrmAdmin
         Height = 24
         Align = alLeft
         Caption = '+'
+        OnClick = btAddTaskClick
       end
     end
     object grdTasks: TStringGrid
       Left = 2
-      Top = 39
+      Top = 42
       Width = 571
-      Height = 178
+      Height = 175
       Align = alClient
       ColCount = 2
       FixedCols = 0
       RowCount = 2
       Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing]
       TabOrder = 1
-      ExplicitTop = 65
-      ExplicitHeight = 128
       ColWidths = (
         37
         497)

@@ -2,8 +2,8 @@ object frmOGE: TfrmOGE
   Left = 0
   Top = 0
   Caption = #1054#1043#1069
-  ClientHeight = 393
-  ClientWidth = 587
+  ClientHeight = 425
+  ClientWidth = 792
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,16 +19,20 @@ object frmOGE: TfrmOGE
   object pgPages: TPageControl
     Left = 0
     Top = 0
-    Width = 587
-    Height = 393
-    ActivePage = tabTests
+    Width = 792
+    Height = 425
+    ActivePage = tabThemes
     Align = alClient
     MultiLine = True
     TabOrder = 0
+    ExplicitWidth = 587
+    ExplicitHeight = 393
     object tabInfo: TTabSheet
       Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103
-      ExplicitTop = 24
-      ExplicitHeight = 365
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object WebBrowser1: TWebBrowser
         Left = 0
         Top = 0
@@ -36,6 +40,7 @@ object frmOGE: TfrmOGE
         Height = 362
         Align = alClient
         TabOrder = 0
+        OnDocumentComplete = WebBrowser1DocumentComplete
         ExplicitLeft = 104
         ExplicitTop = 104
         ExplicitWidth = 300
@@ -43,7 +48,7 @@ object frmOGE: TfrmOGE
         ControlData = {
           4C000000D73B00006A2500000100000001020000000000000000000000000000
           000000004C000000000000000000000001000000E0D057007335CF11AE690800
-          2B2E126208000000000000004C0000000114020000000000C000000000000046
+          2B2E126209000000000000004C0000000114020000000000C000000000000046
           8000000000000000000000000000000000000000000000000000000000000000
           00000000000000000100000000000000000000000000000000000000}
       end
@@ -51,25 +56,27 @@ object frmOGE: TfrmOGE
     object tabThemes: TTabSheet
       Caption = #1058#1077#1084#1099
       ImageIndex = 3
-      ExplicitTop = 24
-      ExplicitHeight = 365
+      ExplicitWidth = 579
+      ExplicitHeight = 362
     end
     object tabTests: TTabSheet
       Caption = #1059#1095#1077#1073#1085#1086'-'#1090#1088#1077#1085#1080#1088#1086#1074#1086#1095#1085#1099#1077' '#1090#1077#1089#1090#1099
       ImageIndex = 4
-      ExplicitLeft = 8
-      ExplicitTop = 31
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
     object tabAlgebra: TTabSheet
       Caption = #1040#1083#1075#1077#1073#1088#1072
       ImageIndex = 1
       TabVisible = False
-      ExplicitTop = 24
-      ExplicitHeight = 365
+      ExplicitWidth = 579
+      ExplicitHeight = 362
       object RadioGroup1: TRadioGroup
         Left = 0
         Top = 0
-        Width = 579
+        Width = 784
         Height = 41
         Align = alTop
         Caption = #1042#1072#1088#1080#1072#1085#1090
@@ -86,32 +93,34 @@ object frmOGE: TfrmOGE
           '9'
           '10')
         TabOrder = 0
-        ExplicitTop = -7
+        ExplicitWidth = 579
       end
       object Panel2: TPanel
         Left = 0
         Top = 41
-        Width = 579
-        Height = 292
+        Width = 784
+        Height = 324
         Align = alClient
         BevelOuter = bvNone
         Color = clWhite
         ParentBackground = False
         ShowCaption = False
         TabOrder = 1
-        ExplicitHeight = 304
+        ExplicitWidth = 579
+        ExplicitHeight = 292
       end
       object Panel1: TPanel
         Left = 0
-        Top = 333
-        Width = 579
+        Top = 365
+        Width = 784
         Height = 29
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 2
-        ExplicitTop = 336
+        ExplicitTop = 333
+        ExplicitWidth = 579
         DesignSize = (
-          579
+          784
           29)
         object Label1: TLabel
           Left = 5
@@ -148,22 +157,24 @@ object frmOGE: TfrmOGE
           TabOrder = 2
         end
         object btBack: TButton
-          Left = 473
+          Left = 678
           Top = 3
           Width = 50
           Height = 25
           Anchors = [akRight, akBottom]
           Caption = '<--'
           TabOrder = 3
+          ExplicitLeft = 473
         end
         object btNext: TButton
-          Left = 525
+          Left = 730
           Top = 3
           Width = 50
           Height = 25
           Anchors = [akRight, akBottom]
           Caption = '-->'
           TabOrder = 4
+          ExplicitLeft = 525
         end
         object Button1: TButton
           Left = 356
@@ -180,8 +191,10 @@ object frmOGE: TfrmOGE
       Caption = 'Admin'
       ImageIndex = 2
       TabVisible = False
-      ExplicitTop = 24
-      ExplicitHeight = 365
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
   object ActionList: TActionList

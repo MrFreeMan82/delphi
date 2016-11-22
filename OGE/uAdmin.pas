@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Buttons, ToolWin, ComCtrls, Grids, StdCtrls, ExtCtrls, uData;
+  Dialogs, Buttons, ToolWin, ComCtrls, Grids, StdCtrls, ExtCtrls, uData,
+  uNewTask;
 
 type
   TfrmAdmin = class(TForm)
@@ -19,6 +20,7 @@ type
     btAddModule: TSpeedButton;
     procedure btAddModuleClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure btAddTaskClick(Sender: TObject);
   private
     { Private declarations }
     tblModules: TSQLiteUniTable;
@@ -43,6 +45,13 @@ begin
     dm.DB.ExecSQL(sql);
     txtNewModuleName.Text := '';
     LoadModules();
+end;
+
+procedure TfrmAdmin.btAddTaskClick(Sender: TObject);
+begin
+   { if not Assigned(frmNewTask) then frmNewTAsk := TfrmNewTask.Create(self);
+    frmNewTask.Add();
+    freeAndNil(frmNewTask); }
 end;
 
 procedure TfrmAdmin.FormDestroy(Sender: TObject);
@@ -73,7 +82,7 @@ end;
 
 procedure TfrmAdmin.ShowAdmin;
 begin
-    LoadModules();
+   // LoadModules();
     show;
 end;
 

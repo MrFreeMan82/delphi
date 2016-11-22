@@ -1,5 +1,7 @@
 program OGE;
 
+
+
 uses
   Forms,
   uOGE in 'uOGE.pas' {frmOGE},
@@ -9,7 +11,8 @@ uses
   SQLiteTable3 in 'SQLiteTable3.pas',
   uNewTask in 'uNewTask.pas' {frmNewTask},
   uTests in 'uTests.pas' {frmTests},
-  uGlobal in 'uGlobal.pas';
+  uGlobal in 'uGlobal.pas',
+  uTheme in 'uTheme.pas' {frmTheme};
 
 {$R *.res}
 

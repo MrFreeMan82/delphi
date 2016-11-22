@@ -1,0 +1,116 @@
+object frmTheme: TfrmTheme
+  Left = 0
+  Top = 0
+  Align = alClient
+  BorderStyle = bsNone
+  ClientHeight = 281
+  ClientWidth = 491
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnMouseWheel = FormMouseWheel
+  PixelsPerInch = 96
+  TextHeight = 16
+  object Panel3: TPanel
+    Left = 0
+    Top = 0
+    Width = 153
+    Height = 281
+    Align = alLeft
+    BevelOuter = bvNone
+    TabOrder = 0
+    object lkNums: TLinkLabel
+      Left = 6
+      Top = 9
+      Width = 129
+      Height = 20
+      Caption = '<a href="#"> '#1063#1080#1089#1083#1072' '#1080' '#1074#1099#1095#1080#1089#1083#1077#1085#1080#1103'</a>'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlue
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsUnderline]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = lkNumsClick
+    end
+  end
+  object Panel5: TPanel
+    Left = 153
+    Top = 0
+    Width = 338
+    Height = 281
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 1
+    ExplicitWidth = 335
+    object ScrollBox: TScrollBox
+      Left = 0
+      Top = 26
+      Width = 338
+      Height = 255
+      VertScrollBar.Increment = 2
+      Align = alClient
+      AutoScroll = False
+      AutoSize = True
+      BevelEdges = []
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BorderStyle = bsNone
+      TabOrder = 0
+      ExplicitLeft = 1
+      ExplicitTop = 27
+      ExplicitWidth = 336
+      ExplicitHeight = 253
+      object imgTheme: TImage
+        Left = 0
+        Top = 0
+        Width = 338
+        Height = 255
+        Align = alClient
+        ExplicitLeft = 5
+        ExplicitTop = 4
+        ExplicitWidth = 424
+        ExplicitHeight = 334
+      end
+    end
+    object Panel4: TPanel
+      Left = 0
+      Top = 0
+      Width = 338
+      Height = 26
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 1
+      ExplicitLeft = 1
+      ExplicitTop = 1
+      ExplicitWidth = 333
+      object SpeedButton1: TSpeedButton
+        Left = 264
+        Top = 0
+        Width = 37
+        Height = 26
+        Align = alRight
+        Caption = '<--'
+        ExplicitLeft = 175
+        ExplicitTop = 2
+        ExplicitHeight = 22
+      end
+      object SpeedButton2: TSpeedButton
+        Left = 301
+        Top = 0
+        Width = 37
+        Height = 26
+        Align = alRight
+        Caption = '-->'
+        ExplicitLeft = 389
+        ExplicitTop = -4
+        ExplicitHeight = 24
+      end
+    end
+  end
+end

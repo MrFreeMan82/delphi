@@ -12,7 +12,6 @@ object frmTests: TfrmTests
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -23,9 +22,6 @@ object frmTests: TfrmTests
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = -91
-    ExplicitTop = 252
-    ExplicitWidth = 579
     DesignSize = (
       541
       29)
@@ -53,6 +49,7 @@ object frmTests: TfrmTests
       Anchors = [akLeft, akBottom]
       Caption = #1054#1090#1074#1077#1090#1080#1090#1100
       TabOrder = 1
+      OnClick = btAnswearClick
     end
     object Button2: TButton
       Left = 292
@@ -71,7 +68,7 @@ object frmTests: TfrmTests
       Anchors = [akRight, akBottom]
       Caption = '<--'
       TabOrder = 3
-      ExplicitLeft = 473
+      OnClick = btBackClick
     end
     object btNext: TButton
       Left = 487
@@ -81,7 +78,7 @@ object frmTests: TfrmTests
       Anchors = [akRight, akBottom]
       Caption = '-->'
       TabOrder = 4
-      ExplicitLeft = 525
+      OnClick = btNextClick
     end
     object Button1: TButton
       Left = 356
@@ -93,22 +90,6 @@ object frmTests: TfrmTests
       TabOrder = 5
     end
   end
-  object Panel2: TPanel
-    Left = 0
-    Top = 41
-    Width = 541
-    Height = 207
-    Align = alClient
-    BevelOuter = bvNone
-    Color = clWhite
-    ParentBackground = False
-    ShowCaption = False
-    TabOrder = 1
-    ExplicitLeft = -91
-    ExplicitTop = -11
-    ExplicitWidth = 579
-    ExplicitHeight = 292
-  end
   object Panel3: TPanel
     Left = 0
     Top = 0
@@ -116,10 +97,7 @@ object frmTests: TfrmTests
     Height = 41
     Align = alTop
     BevelOuter = bvNone
-    TabOrder = 2
-    ExplicitLeft = 104
-    ExplicitTop = 112
-    ExplicitWidth = 185
+    TabOrder = 1
     object cboModule: TComboBox
       Left = 5
       Top = 11
@@ -127,6 +105,7 @@ object frmTests: TfrmTests
       Height = 22
       Style = csOwnerDrawFixed
       TabOrder = 0
+      OnChange = cboModuleChange
     end
     object rgVariants: TRadioGroup
       Left = 156
@@ -149,6 +128,35 @@ object frmTests: TfrmTests
         '10')
       TabOrder = 1
       OnClick = rgVariantsClick
+    end
+  end
+  object webTasks: TWebBrowser
+    Left = 0
+    Top = 41
+    Width = 541
+    Height = 207
+    Align = alClient
+    PopupMenu = PopupMenu1
+    TabOrder = 2
+    OnDocumentComplete = webTasksDocumentComplete
+    ExplicitLeft = 117
+    ExplicitTop = 64
+    ExplicitWidth = 300
+    ExplicitHeight = 150
+    ControlData = {
+      4C000000EA370000651500000000000000000000000000000000000000000000
+      000000004C000000000000000000000001000000E0D057007335CF11AE690800
+      2B2E126209000000000000004C0000000114020000000000C000000000000046
+      8000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000100000000000000000000000000000000000000}
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 168
+    Top = 144
+    object mNewTask: TMenuItem
+      Caption = 'New Task'
+      ShortCut = 49230
+      OnClick = mNewTaskClick
     end
   end
 end
