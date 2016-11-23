@@ -6,40 +6,28 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, OleCtrls, SHDocVw, ComCtrls, StdCtrls, ExtCtrls, ExtDlgs, Grids,
   ToolWin, Buttons, uAdmin, PlatformDefaultStyleActnCtrls, ActnList, ActnMan,
-  AppEvnts, uTests, uTheme;
+  AppEvnts, uTests, uTheme, uData;
 
 type
   TfrmOGE = class(TForm)
     pgPages: TPageControl;
     tabInfo: TTabSheet;
-    WebBrowser1: TWebBrowser;
-    tabAlgebra: TTabSheet;
-    RadioGroup1: TRadioGroup;
     tabAdmin: TTabSheet;
-    Panel2: TPanel;
     ActionList: TActionList;
     Action1: TAction;
     tabThemes: TTabSheet;
     tabTests: TTabSheet;
-    Panel1: TPanel;
-    Label1: TLabel;
-    txtAnswer: TEdit;
-    btAnswear: TButton;
-    Button2: TButton;
-    btBack: TButton;
-    btNext: TButton;
-    Button1: TButton;
+    WebBrowser1: TWebBrowser;
     procedure FormCreate(Sender: TObject);
-    procedure Action1Execute(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure WebBrowser1DocumentComplete(ASender: TObject;
       const pDisp: IDispatch; var URL: OleVariant);
   private
     { Private declarations }
-    path: string;
     frmAdmin: TfrmAdmin;
     frmTests: TfrmTests;
     frmTheme: TfrmTheme;
+    path: string;
   public
     { Public declarations }
   end;
@@ -48,27 +36,14 @@ var
   frmOGE: TfrmOGE;
 
 implementation
-uses SQLiteTable3;
 
 {$R *.dfm}
 
-procedure TfrmOGE.Action1Execute(Sender: TObject);
-begin
-     exit;
-   { if not Assigned(frmAdmin) then
-    begin
-        frmAdmin := TfrmAdmin.Create(self);
-        frmAdmin.Dock(tabAdmin, tabAdmin.ClientRect);
-        frmAdmin.ShowAdmin;
-        tabAdmin.TabVisible := true;
-        self.Caption := 'Администратор';
-    end; }
-end;
-
 procedure TfrmOGE.FormCreate(Sender: TObject);
 begin
-    path := ExtractFilePath(Application.ExeName);
-    WebBrowser1.Navigate(path + 'html/1.html');
+    Path := dm.exePath();
+    WebBrowser1.Navigate(path + '1.html');
+    WebBrowser1.OleObject.Document.bgColor := '#E0FFFF';
     pgPages.ActivePage := tabInfo;
 
     if not Assigned(frmTests) then frmTests := TfrmTests.Create(self);
@@ -90,8 +65,8 @@ end;
 procedure TfrmOGE.WebBrowser1DocumentComplete(ASender: TObject;
   const pDisp: IDispatch; var URL: OleVariant);
 begin
-  //  while WebBrowser1.ReadyState <> 4 do Application.ProcessMessages;
-  //  WebBrowser1.OleObject.Document.bgColor := '#E0FFFF';
+    while WebBrowser1.ReadyState <> 4 do Application.ProcessMessages;
+    WebBrowser1.OleObject.Document.bgColor := '#E0FFFF';
 end;
 
 end.

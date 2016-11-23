@@ -1,6 +1,10 @@
 object dm: Tdm
   OldCreateOrder = False
-  OnCreate = DataModuleCreate
-  Height = 150
-  Width = 215
+  Height = 140
+  Width = 190
+  object xmlDoc: TXMLDocument
+    Left = 64
+    Top = 48
+    DOMVendorDesc = 'MSXML'
+  end
 end

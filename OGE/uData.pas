@@ -3,43 +3,69 @@ unit uData;
 interface
 
 uses
-  SysUtils, Classes, SQLiteTable3, SQLite3;
+  SysUtils, Classes, Forms, xmldom, XMLIntf, msxmldom, XMLDoc;
 
 type
-  TSQLiteUniTable = SQLiteTable3.TSQLiteUniTable;
+  TTopicsInfo = record
+      id: integer;
+      pageCount: integer;
+      name: string;
+      dir: string;
+      displayLabel: string;
+  end;
+
+  TTopicList = array of TTopicsInfo;
 
   Tdm = class(TDataModule)
-    procedure DataModuleCreate(Sender: TObject);
+    xmlDoc: TXMLDocument;
   private
     { Private declarations }
 
   public
     { Public declarations }
-    DB: TSQLiteDatabase;
+    function loadTopics(): TTopicList;
+    function exePath(): string;
   end;
 
 var
   dm: Tdm;
 
+const TOPICS_DIR = 'Topics';
+
 implementation
 
 {$R *.dfm}
 
-procedure Tdm.DataModuleCreate(Sender: TObject);
-var sql: ansistring;
+{ Tdm }
+
+function Tdm.exePath: string;
 begin
-     DB := TSQLiteDatabase.Create('data.sqllite');
+     result := ExtractFilePath(Application.ExeName);
+end;
 
-     if not DB.TableExists('MODULE') then
+function Tdm.loadTopics(): TTopicList;
+var xml: string;
+    i, cnt: integer;
+    root, node: IXMLNode;
+begin
+     xml := extractFilePath(Application.ExeName) + TOPICS_DIR + '\info.xml';
+     xmlDoc.LoadFromFile(xml);
+     root := xmlDoc.ChildNodes.FindNode('TOPICS');
+     if root = nil then exit;
+
+     cnt := root.ChildNodes.Count;
+     setLength(result, cnt);
+
+     for i := 0 to cnt - 1 do
      begin
-          sql := 'CREATE TABLE MODULE ( ';
-          sql := sql + 'M_ID INTEGER PRIMARY KEY AUTOINCREMENT,';
-          sql := sql + 'M_NAME TEXT)';
-
-          DB.ExecSQL(sql);
-
-        //  sql := 'INSERT INTO MODULE VALUES (';
+          node := root.ChildNodes.Get(i);
+          result[i].name := node.ChildNodes.FindNode('NAME').Text;
+          result[i].dir  := node.ChildNodes.FindNode('DIR').Text;
+          result[i].displayLabel := node.ChildNodes.FindNode('DISPLAY_LABEL').Text;
+          result[i].id := strToInt(node.ChildNodes.FindNode('ID').Text);
+          result[i].pageCount := strToInt(node.ChildNodes.FindNode('PAGE_CNT').Text);
      end;
- end;
+
+end;
 
 end.

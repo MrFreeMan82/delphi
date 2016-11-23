@@ -75,7 +75,7 @@ end;
 procedure TfrmTests.mNewTaskClick(Sender: TObject);
 begin
     if not Assigned(frmNewTask) then frmNewTask := TfrmNewTask.Create(self);
-    frmNewTask.Add(cboModule.ItemIndex, rgVariants.ItemIndex + 1);
+    //frmNewTask.Add(cboModule.ItemIndex, rgVariants.ItemIndex + 1);
     freeAndNil(frmNewTask);
 end;
 
@@ -85,17 +85,6 @@ begin
      inc(currentTask);
      if currentTask > 10 then currentTask := 10;
 
-     v := rgVariants.ItemIndex + 1;
-
-     case cboModule.ItemIndex of
-         MDL_ALGEBRA:
-            task := format('%shtml\%s\%d\%d\%d.html',
-                 [ExtractFilePath(Application.ExeName), DIR_ALGEBRA,
-                                             v, currentTask, currentTask]);
-         else exit;
-     end;
-
-     webTasks.Navigate(task);
 end;
 
 procedure TfrmTests.OpenFirstTask;
@@ -104,15 +93,6 @@ begin
      currentTask := 1;
      v := rgVariants.ItemIndex + 1;
 
-     case cboModule.ItemIndex of
-         MDL_ALGEBRA:
-            task := format('%shtml\%s\%d\%d\%d.html',
-                 [ExtractFilePath(Application.ExeName), DIR_ALGEBRA,
-                                             v, currentTask, currentTask]);
-         else exit;
-     end;
-
-     webTasks.Navigate(task);
 end;
 
 procedure TfrmTests.PrevTask;
@@ -121,25 +101,12 @@ begin
      dec(currentTask);
      if currentTask < 1 then currentTask := 1;
 
-     v := rgVariants.ItemIndex + 1;
-
-     case cboModule.ItemIndex of
-         MDL_ALGEBRA:
-            task := format('%shtml\%s\%d\%d\%d.html',
-                 [ExtractFilePath(Application.ExeName), DIR_ALGEBRA,
-                                             v, currentTask, currentTask]);
-         else exit;
-     end;
-
-     webTasks.Navigate(task);
 end;
 
 procedure TfrmTests.ShowTests;
 begin
     fillChar(userTasks, sizeof(userTasks), 0);
 
-    LoadModuleComboBox(cboModule);
-    cboModule.ItemIndex := MDL_ALGEBRA;
     rgVariants.ItemIndex := 0;
     show;
 end;

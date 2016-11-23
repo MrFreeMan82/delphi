@@ -13,7 +13,6 @@ object frmNewTask: TfrmNewTask
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
-  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 16
   object Panel1: TPanel
@@ -109,7 +108,6 @@ object frmNewTask: TfrmNewTask
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
     ModalResult = 1
     TabOrder = 1
-    OnClick = btSaveClick
   end
   object Button2: TButton
     Left = 568

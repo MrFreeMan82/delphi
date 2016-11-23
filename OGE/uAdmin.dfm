@@ -12,7 +12,8 @@ object frmAdmin: TfrmAdmin
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnDestroy = FormDestroy
+  ExplicitWidth = 320
+  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 16
   object grModule: TGroupBox
@@ -53,7 +54,6 @@ object frmAdmin: TfrmAdmin
         Height = 27
         Align = alLeft
         Caption = '+'
-        OnClick = btAddModuleClick
       end
       object txtNewModuleName: TEdit
         Left = 0
