@@ -26,10 +26,12 @@ type
     { Private declarations }
     frmAdmin: TfrmAdmin;
     frmTests: TfrmTests;
-    frmTheme: TfrmTheme;
+    frmTopics: TfrmTopics;
     path: string;
+    function getTopicList: TTopicList;
   public
     { Public declarations }
+    property TopicList: TTopicList read getTopicList;
   end;
 
 var
@@ -46,20 +48,25 @@ begin
     WebBrowser1.OleObject.Document.bgColor := '#E0FFFF';
     pgPages.ActivePage := tabInfo;
 
+    if not Assigned(frmTopics) then frmTopics := TfrmTopics.Create(self);
+    frmTopics.Dock(tabThemes, tabThemes.ClientRect);
+    frmTopics.showTopics();
+
     if not Assigned(frmTests) then frmTests := TfrmTests.Create(self);
     frmTests.Dock(tabTests, tabTests.ClientRect);
     frmTests.ShowTests();
-
-    if not Assigned(frmTheme) then frmTheme := TfrmTheme.Create(self);
-    frmTheme.Dock(tabThemes, tabThemes.ClientRect);
-    frmTheme.showThemes();
 end;
 
 procedure TfrmOGE.FormDestroy(Sender: TObject);
 begin
     freeAndNil(frmAdmin);
     freeAndNil(frmTests);
-    freeAndNil(frmTheme);
+    freeAndNil(frmTopics);
+end;
+
+function TfrmOGE.getTopicList: TTopicList;
+begin
+    result := frmTopics.TopicList;
 end;
 
 procedure TfrmOGE.WebBrowser1DocumentComplete(ASender: TObject;

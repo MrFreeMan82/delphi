@@ -7,7 +7,7 @@ uses
   Dialogs, Buttons, ExtCtrls, uGlobal, uData;
 
 type
-  TfrmTheme = class(TForm)
+  TfrmTopics = class(TForm)
     pnlLinks: TPanel;
     lkNums: TLinkLabel;
     Panel5: TPanel;
@@ -35,7 +35,8 @@ type
     procedure loadPage(pageNo, topicNo: integer);
   public
     { Public declarations }
-    procedure showThemes();
+    procedure showTopics();
+    property TopicList: TTopicList read topics;
   end;
 
 implementation
@@ -45,7 +46,7 @@ uses jpeg, uOGE;
 
 { TfrmTheme }
 
-procedure TfrmTheme.showThemes;
+procedure TfrmTopics.showTopics;
 begin
     page := 1;
     topics := dm.loadTopics();
@@ -53,7 +54,7 @@ begin
     show;
 end;
 
-procedure TfrmTheme.btNextPageClick(Sender: TObject);
+procedure TfrmTopics.btNextPageClick(Sender: TObject);
 begin
     inc(page);
     if page > topics[topicIndex].pageCount then page := topics[topicIndex].pageCount;
@@ -61,7 +62,7 @@ begin
     loadPage(page, topicIndex);
 end;
 
-procedure TfrmTheme.btPrevPageClick(Sender: TObject);
+procedure TfrmTopics.btPrevPageClick(Sender: TObject);
 begin
      dec(page);
      if page < 1 then page := 1;
@@ -69,12 +70,12 @@ begin
      loadPage(page, topicIndex);
 end;
 
-procedure TfrmTheme.btTestClick(Sender: TObject);
+procedure TfrmTopics.btTestClick(Sender: TObject);
 begin
      frmOGE.pgPages.ActivePage := frmOGE.tabTests;
 end;
 
-procedure TfrmTheme.createTopicLinks;
+procedure TfrmTopics.createTopicLinks;
 var i, l, t, m: integer;
 begin
      l := 3;
@@ -98,8 +99,7 @@ begin
      end;
 end;
 
-procedure TfrmTheme.linkClick(Sender: TObject);
-
+procedure TfrmTopics.linkClick(Sender: TObject);
 begin
     if not (Sender is TLinkLabel) then exit;
 
@@ -108,12 +108,12 @@ begin
     loadPage(page, topicIndex);
 end;
 
-procedure TfrmTheme.loadPage(pageNo, topicNo: integer);
+procedure TfrmTopics.loadPage(pageNo, topicNo: integer);
 var fileName: string;
     jpg: TJpegImage;
 begin
     fileName := format('%s%s\%s\%d.jpg',
-        [dm.exePath(), TOPICS_DIR, topics[topicNo].dir, pageNo]);
+        [dm.exePath(), TOPIC_DIR, topics[topicNo].dir, pageNo]);
 
     if not FileExists(fileName) then exit;
 
@@ -127,13 +127,13 @@ begin
     end;
 end;
 
-procedure TfrmTheme.FormDestroy(Sender: TObject);
+procedure TfrmTopics.FormDestroy(Sender: TObject);
 var i: integer;
 begin
      for i := 0 to length(links) - 1 do freeAndNil(links[i]);
 end;
 
-procedure TfrmTheme.FormMouseWheel(Sender: TObject; Shift: TShiftState;
+procedure TfrmTopics.FormMouseWheel(Sender: TObject; Shift: TShiftState;
   WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
 begin
     with scrollBox.VertScrollBar do

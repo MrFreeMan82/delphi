@@ -10,7 +10,7 @@ uses
   uNewTask in 'uNewTask.pas' {frmNewTask},
   uTests in 'uTests.pas' {frmTests},
   uGlobal in 'uGlobal.pas',
-  uTheme in 'uTheme.pas' {frmTheme};
+  uTheme in 'uTheme.pas' {frmTopics};
 
 {$R *.res}
 

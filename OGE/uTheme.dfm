@@ -1,4 +1,4 @@
-object frmTheme: TfrmTheme
+object frmTopics: TfrmTopics
   Left = 0
   Top = 0
   Align = alClient
@@ -57,8 +57,6 @@ object frmTheme: TfrmTheme
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = 153
-    ExplicitWidth = 338
     object ScrollBox: TScrollBox
       AlignWithMargins = True
       Left = 20
@@ -75,10 +73,6 @@ object frmTheme: TfrmTheme
       BevelOuter = bvNone
       BorderStyle = bsNone
       TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitTop = 26
-      ExplicitWidth = 338
-      ExplicitHeight = 255
       object img: TImage
         Left = 0
         Top = 0
@@ -99,7 +93,6 @@ object frmTheme: TfrmTheme
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitWidth = 338
       object btPrevPage: TSpeedButton
         Left = 205
         Top = 0
