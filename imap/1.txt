@@ -1,0 +1,44 @@
+Received: from smtp3j.mail.yandex.net ([95.108.130.68])
+	by mxback6h.mail.yandex.net with LMTP id XG3jlhkT
+	for <OGESYNC@yandex.ru>; Tue, 27 Dec 2016 15:01:16 +0300
+Received: from smtp3j.mail.yandex.net (localhost.localdomain [127.0.0.1])
+	by smtp3j.mail.yandex.net (Yandex) with ESMTP id DEF486241007
+	for <OGESYNC@yandex.ru>; Tue, 27 Dec 2016 15:01:15 +0300 (MSK)
+Received: by smtp3j.mail.yandex.net (nwsmtp/Yandex) with ESMTPSA id biiTDyg9Nw-1FkWsZp7;
+	Tue, 27 Dec 2016 15:01:15 +0300
+	(using TLSv1 with cipher ECDHE-RSA-AES128-SHA (128/128 bits))
+	(Client certificate not present)
+X-Yandex-Front: smtp3j.mail.yandex.net
+X-Yandex-TimeMark: 1482840075
+Message-Id: <20161227150115.1FkWsZp7@smtp3j.mail.yandex.net>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.ru; s=mail; t=1482840075;
+	bh=d9VeqyJo1wmCQqwy71aRdIJrFqdxREbobSFwbh7Aqmk=;
+	h=From:To:Subject:Date;
+	b=EWpp2YygB5PDBKl4FeaT4tkLWe1Z63hgJjjXDdwGGP+RRgiQxjyN5oAUa2BrMzOXS
+	 MXItTzf7f6YowMFkU+i4YUVck8dQA4SE6IIWpaRzD+ZDU93ivU6kXYUb5AN3Ob1pLG
+	 I9Pe1tNCvbLrrXNuM7AHcw6OfKGycORHg+6eUzrY=
+Authentication-Results: smtp3j.mail.yandex.net; dkim=pass header.i=@yandex.ru
+X-Yandex-Spam: 1
+From: OGESYNC
+To: OGESYNC
+Subject: SYNC
+Date: Tue, 27 Dec 2016 14:01:15 +0200
+MIME-Version: 1.0 (produced by Synapse)
+X-mailer: Synapse - Pascal TCP/IP library by Lukas Gebauer
+Content-type: Multipart/alternative;
+ boundary="00D5E88C_389F71D7_Synapse_boundary"
+Content-Description: Multipart message
+Return-Path: OGESYNC@yandex.ru
+X-Yandex-Forward: 4d03bf909396eb927559f8614cb73352
+
+--00D5E88C_389F71D7_Synapse_boundary
+Content-type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: Quoted-printable
+Content-Disposition: inline
+Content-Description: Message text
+
+<OGE_SYNC>
+1;Administrator;tabTasks;MASK_70;111111111111111011111111111111111111111101111=
+111111111111111111111111111111111111111111111111111111111111111111111111110
+</OGE_SYNC>
+--00D5E88C_389F71D7_Synapse_boundary--
